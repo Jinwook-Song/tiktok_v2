@@ -82,6 +82,7 @@ class _EmailScreenState extends State<EmailScreen> {
                 onEditingComplete: _onSubmit,
                 keyboardType: TextInputType.emailAddress,
                 autocorrect: false,
+                autofocus: true,
                 decoration: InputDecoration(
                   hintText: 'Email',
                   hintStyle: TextStyle(
