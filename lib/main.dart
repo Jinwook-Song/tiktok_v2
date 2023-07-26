@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tiktok_v2/constants/sizes.dart';
-import 'package:tiktok_v2/features/authentication/sign_up_screen.dart';
+import 'package:tiktok_v2/features/authentication/birthday_screen.dart';
 
 void main() {
   runApp(const TikTokApp());
@@ -29,6 +29,6 @@ class TikTokApp extends StatelessWidget {
               )),
           scaffoldBackgroundColor: Colors.white,
         ),
-        home: const SignUpScreen());
+        home: const BirthdayScreen());
   }
 }
