@@ -2,8 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:tiktok_v2/constants/gaps.dart';
 import 'package:tiktok_v2/constants/sizes.dart';
 
-class UsernameScreen extends StatelessWidget {
+class UsernameScreen extends StatefulWidget {
   const UsernameScreen({super.key});
+
+  @override
+  State<UsernameScreen> createState() => _UsernameScreenState();
+}
+
+class _UsernameScreenState extends State<UsernameScreen> {
+  final TextEditingController _usernameController = TextEditingController();
+
+  String _username = '';
+
+  @override
+  void initState() {
+    super.initState();
+
+    // add event listeners
+    _usernameController.addListener(() {
+      setState(() {
+        _username = _usernameController.text;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _usernameController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +57,7 @@ class UsernameScreen extends StatelessWidget {
             ),
             Gaps.v20,
             TextField(
+              controller: _usernameController,
               decoration: InputDecoration(
                 hintText: 'Username',
                 hintStyle: TextStyle(
@@ -52,10 +80,13 @@ class UsernameScreen extends StatelessWidget {
             Gaps.v20,
             FractionallySizedBox(
               widthFactor: 1,
-              child: Container(
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 150),
                 padding: const EdgeInsets.symmetric(vertical: Sizes.size16),
                 decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColor,
+                  color: _username.isEmpty
+                      ? Colors.grey.shade300
+                      : Theme.of(context).primaryColor,
                   borderRadius: BorderRadius.circular(
                     Sizes.size2,
                   ),
