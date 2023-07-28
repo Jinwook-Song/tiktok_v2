@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tiktok_v2/constants/gaps.dart';
 import 'package:tiktok_v2/constants/sizes.dart';
+import 'package:tiktok_v2/features/onboarding/widgets/interests_button.dart';
 
 const interests = [
   "Daily Life",
@@ -43,94 +45,102 @@ const interests = [
   "Home & Garden",
 ];
 
-class InterestsScreen extends StatelessWidget {
+class InterestsScreen extends StatefulWidget {
   const InterestsScreen({super.key});
+
+  @override
+  State<InterestsScreen> createState() => _InterestsScreenState();
+}
+
+class _InterestsScreenState extends State<InterestsScreen> {
+  final ScrollController _scrollController = ScrollController();
+
+  bool _showHeader = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _onScroll();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _onScroll() {
+    _scrollController.addListener(() {
+      if (_scrollController.offset > 110) {
+        if (_showHeader) return;
+        _showHeader = true;
+        setState(() {});
+      } else {
+        _showHeader = false;
+        setState(() {});
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Choose your interests'),
+        surfaceTintColor: Colors.white,
+        title: AnimatedOpacity(
+            opacity: _showHeader ? 1 : 0,
+            duration: const Duration(milliseconds: 150),
+            child: const Text('Choose your interests')),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: Sizes.size24,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Gaps.v32,
-              const Text(
-                'Choose your interests',
-                style: TextStyle(
-                  fontSize: Sizes.size40,
-                  fontWeight: FontWeight.w600,
+      body: Scrollbar(
+        controller: _scrollController,
+        child: SingleChildScrollView(
+          controller: _scrollController,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: Sizes.size24,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Gaps.v32,
+                const Text(
+                  'Choose your interests',
+                  style: TextStyle(
+                    fontSize: Sizes.size40,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
-              ),
-              Gaps.v16,
-              Text(
-                'Get better video recommendations',
-                style: TextStyle(
-                  fontSize: Sizes.size16,
-                  color: Colors.grey.shade800,
+                Gaps.v16,
+                Text(
+                  'Get better video recommendations',
+                  style: TextStyle(
+                    fontSize: Sizes.size16,
+                    color: Colors.grey.shade800,
+                  ),
                 ),
-              ),
-              Gaps.v64,
-              Wrap(
-                spacing: Sizes.size12,
-                runSpacing: Sizes.size20,
-                children: [
-                  for (var interest in interests)
-                    Container(
-                      padding: const EdgeInsets.all(Sizes.size12),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          border:
-                              Border.all(color: Colors.black.withOpacity(0.1)),
-                          borderRadius: BorderRadius.circular(
-                            Sizes.size32,
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.05),
-                              blurRadius: 5,
-                              spreadRadius: 5,
-                            ),
-                          ]),
-                      child: Text(
-                        interest,
-                        style: const TextStyle(fontWeight: FontWeight.w600),
-                      ),
-                    )
-                ],
-              ),
-              Gaps.v48,
-            ],
+                Gaps.v64,
+                Wrap(
+                  spacing: Sizes.size12,
+                  runSpacing: Sizes.size20,
+                  children: [
+                    for (var interest in interests)
+                      InterestsButton(interest: interest)
+                  ],
+                ),
+                Gaps.v48,
+              ],
+            ),
           ),
         ),
       ),
       bottomNavigationBar: BottomAppBar(
         surfaceTintColor: Colors.white,
         elevation: 1,
-        child: Container(
-          decoration: BoxDecoration(
-            color: Theme.of(context).primaryColor,
-            borderRadius: BorderRadius.circular(
-              Sizes.size2,
-            ),
-          ),
-          child: const Center(
-            child: Text(
-              'Next',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: Sizes.size16,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
+        child: CupertinoButton(
+          onPressed: () {},
+          color: Theme.of(context).primaryColor,
+          child: const Text('Next'),
         ),
       ),
     );
