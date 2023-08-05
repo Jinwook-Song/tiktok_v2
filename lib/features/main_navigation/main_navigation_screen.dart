@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({super.key});
@@ -32,29 +31,54 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _screens[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.shifting,
-        currentIndex: _currentIndex,
-        onTap: _onBottomNavigationTap,
-        items: const [
-          BottomNavigationBarItem(
-            icon: FaIcon(FontAwesomeIcons.house),
-            label: 'house',
-            tooltip: 'Main',
-            backgroundColor: Colors.amber,
+      bottomNavigationBar: NavigationBar(
+        onDestinationSelected: _onBottomNavigationTap,
+        selectedIndex: _currentIndex,
+        labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+        destinations: const [
+          NavigationDestination(
+            icon: Icon(Icons.house_outlined),
+            selectedIcon: Icon(Icons.house),
+            label: 'Home',
           ),
-          BottomNavigationBarItem(
-            icon: FaIcon(FontAwesomeIcons.magnifyingGlass),
-            label: 'search',
-            backgroundColor: Colors.pink,
+          NavigationDestination(
+            icon: Icon(Icons.search_outlined),
+            selectedIcon: Icon(Icons.search),
+            label: 'Search',
           ),
-          BottomNavigationBarItem(
-            icon: FaIcon(FontAwesomeIcons.message),
-            label: 'chat',
-            backgroundColor: Colors.purple,
+          NavigationDestination(
+            icon: Icon(Icons.chat_outlined),
+            selectedIcon: Icon(Icons.chat),
+            label: 'Chat',
           ),
         ],
       ),
     );
   }
 }
+
+
+// Material 2 Bottom Navigation Bar
+// bottomNavigationBar: BottomNavigationBar(
+//   type: BottomNavigationBarType.shifting,
+//   currentIndex: _currentIndex,
+//   onTap: _onBottomNavigationTap,
+//   items: const [
+//     BottomNavigationBarItem(
+//       icon: FaIcon(FontAwesomeIcons.house),
+//       label: 'house',
+//       tooltip: 'Main',
+//       backgroundColor: Colors.amber,
+//     ),
+//     BottomNavigationBarItem(
+//       icon: FaIcon(FontAwesomeIcons.magnifyingGlass),
+//       label: 'search',
+//       backgroundColor: Colors.pink,
+//     ),
+//     BottomNavigationBarItem(
+//       icon: FaIcon(FontAwesomeIcons.message),
+//       label: 'chat',
+//       backgroundColor: Colors.purple,
+//     ),
+//   ],
+// ),
