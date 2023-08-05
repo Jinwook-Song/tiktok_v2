@@ -20,9 +20,13 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
     // validate(save) all of fields at once
     if (_formKey.currentState?.validate() == true) {
       _formKey.currentState!.save();
-      Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => const InterestsScreen(),
-      ));
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(
+          builder: (context) => const InterestsScreen(),
+        ),
+        // 이전 경로를 기억할 지 선택
+        (route) => false,
+      );
     }
   }
 
