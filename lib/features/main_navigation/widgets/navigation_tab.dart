@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tiktok_v2/constants/gaps.dart';
+import 'package:tiktok_v2/constants/sizes.dart';
 
 class NavigationTab extends StatelessWidget {
   const NavigationTab({
@@ -36,6 +37,7 @@ class NavigationTab extends StatelessWidget {
                 lable,
                 style: const TextStyle(
                   color: Colors.white,
+                  fontSize: Sizes.size10,
                 ),
               ),
             ],

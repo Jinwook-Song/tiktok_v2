@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tiktok_v2/constants/gaps.dart';
 import 'package:tiktok_v2/features/main_navigation/widgets/navigation_tab.dart';
+import 'package:tiktok_v2/features/main_navigation/widgets/record_video_button.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({super.key});
@@ -20,7 +22,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
       child: Text('Discover'),
     ),
     const Center(
-      child: Text('None'),
+      child: Text('Record Video'),
     ),
     const Center(
       child: Text('Inbox'),
@@ -33,6 +35,17 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   void _onBottomNavigationTap(int tab) {
     _currentIndex = tab;
     setState(() {});
+  }
+
+  void _onRecordVideoTap() {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => Scaffold(
+        appBar: AppBar(
+          title: const Text('Record Video'),
+        ),
+      ),
+      fullscreenDialog: true,
+    ));
   }
 
   @override
@@ -62,6 +75,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           color: Colors.black,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               NavigationTab(
                 icon: FontAwesomeIcons.house,
@@ -77,6 +91,12 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 isSelected: _currentIndex == 1,
                 onTap: () => _onBottomNavigationTap(1),
               ),
+              Gaps.h20,
+              GestureDetector(
+                onTap: _onRecordVideoTap,
+                child: const RecordVideoButton(),
+              ),
+              Gaps.h20,
               NavigationTab(
                 icon: FontAwesomeIcons.message,
                 selectedIcon: FontAwesomeIcons.solidMessage,
@@ -96,6 +116,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     );
   }
 }
+
 
 /* Material 2 Bottom Navigation Bar
 bottomNavigationBar: BottomNavigationBar(
