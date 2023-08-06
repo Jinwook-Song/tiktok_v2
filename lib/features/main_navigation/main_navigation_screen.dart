@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_v2/constants/gaps.dart';
 import 'package:tiktok_v2/features/main_navigation/widgets/navigation_tab.dart';
 import 'package:tiktok_v2/features/main_navigation/widgets/record_video_button.dart';
+import 'package:tiktok_v2/features/videos/video_timeline_screen.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({super.key});
@@ -15,9 +16,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   int _currentIndex = 0;
 
   final List<Widget> _screens = [
-    const Center(
-      child: Text('Home'),
-    ),
+    const VideoTimelineScreen(),
     const Center(
       child: Text('Discover'),
     ),
