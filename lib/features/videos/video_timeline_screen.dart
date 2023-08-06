@@ -58,6 +58,7 @@ class _VideoTimelineScreenState extends State<VideoTimelineScreen> {
       itemBuilder: (context, index) {
         return VideoPost(
           onVideoFinished: _onVideoFinished,
+          videoIndex: index,
         );
       },
     );
