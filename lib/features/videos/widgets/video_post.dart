@@ -93,6 +93,7 @@ class _VideoPostState extends State<VideoPost>
     if (!_isPaused) _toggleVideoPlaying();
     // modal이 닫히면 resolve 된다
     await showModalBottomSheet(
+      isScrollControlled: true,
       context: context,
       builder: (context) => const VideoComments(),
     );
