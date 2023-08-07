@@ -35,6 +35,10 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
 
   void _onSubmitted(String value) {}
 
+  void _onTabBarTap(int tab) {
+    FocusScope.of(context).unfocus();
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -48,6 +52,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
             onSubmitted: _onSubmitted,
           ),
           bottom: TabBar(
+            onTap: _onTabBarTap,
             splashFactory: NoSplash.splashFactory,
             padding: const EdgeInsets.symmetric(horizontal: Sizes.size16),
             isScrollable: true,
@@ -69,6 +74,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
         body: TabBarView(
           children: [
             GridView.builder(
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
               itemCount: 50,
               padding: const EdgeInsets.all(Sizes.size6),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
