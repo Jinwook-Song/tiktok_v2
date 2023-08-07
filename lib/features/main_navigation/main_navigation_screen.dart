@@ -24,6 +24,9 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   }
 
   void _onRecordVideoTap() {
+    _currentIndex = 2;
+    setState(() {});
+
     Navigator.of(context).push(MaterialPageRoute(
       builder: (context) => Scaffold(
         appBar: AppBar(
