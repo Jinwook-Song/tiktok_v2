@@ -15,22 +15,6 @@ class MainNavigationScreen extends StatefulWidget {
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
   int _currentIndex = 0;
 
-  final List<Widget> _screens = [
-    const VideoTimelineScreen(),
-    const Center(
-      child: Text('Discover'),
-    ),
-    const Center(
-      child: Text('Record Video'),
-    ),
-    const Center(
-      child: Text('Inbox'),
-    ),
-    const Center(
-      child: Text('Profile'),
-    ),
-  ];
-
   void _onBottomNavigationTap(int tab) {
     _currentIndex = tab;
     setState(() {});
@@ -57,19 +41,21 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
         children: [
           Offstage(
             offstage: _currentIndex != 0,
-            child: _screens[_currentIndex],
+            child: VideoTimelineScreen(
+              isActivated: _currentIndex == 0,
+            ),
           ),
           Offstage(
             offstage: _currentIndex != 1,
-            child: _screens[_currentIndex],
+            child: const Center(child: Text('Discover')),
           ),
           Offstage(
             offstage: _currentIndex != 3,
-            child: _screens[_currentIndex],
+            child: const Center(child: Text('Inbox')),
           ),
           Offstage(
             offstage: _currentIndex != 4,
-            child: _screens[_currentIndex],
+            child: const Center(child: Text('Profile')),
           ),
         ],
       ),
@@ -144,7 +130,6 @@ bottomNavigationBar: BottomNavigationBar(
     ),
   ],
 ), */
-
 
 /* Material 3  Navigation Bar
 bottomNavigationBar: NavigationBar(

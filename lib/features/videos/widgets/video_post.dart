@@ -12,10 +12,12 @@ class VideoPost extends StatefulWidget {
     super.key,
     required this.onVideoFinished,
     required this.videoIndex,
+    required this.isActivated,
   });
 
   final void Function() onVideoFinished;
   final int videoIndex;
+  final bool isActivated;
 
   @override
   State<VideoPost> createState() => _VideoPostState();
@@ -23,8 +25,9 @@ class VideoPost extends StatefulWidget {
 
 class _VideoPostState extends State<VideoPost>
     with SingleTickerProviderStateMixin {
-  final VideoPlayerController _videoPlayerController =
-      VideoPlayerController.asset('assets/videos/sample.mov');
+  late final VideoPlayerController _videoPlayerController =
+      VideoPlayerController.asset(
+          'assets/videos/yeonjae_0${(widget.videoIndex % 6) + 1}.MP4');
 
   late AnimationController _animationController;
 
@@ -45,8 +48,8 @@ class _VideoPostState extends State<VideoPost>
 
   @override
   void dispose() {
-    _videoPlayerController.dispose();
     _animationController.dispose();
+    _videoPlayerController.dispose();
     super.dispose();
   }
 
@@ -72,6 +75,10 @@ class _VideoPostState extends State<VideoPost>
         !_videoPlayerController.value.isPlaying &&
         !_isPaused) {
       _videoPlayerController.play();
+    }
+
+    if (_videoPlayerController.value.isPlaying && !widget.isActivated) {
+      _toggleVideoPlaying();
     }
   }
 
@@ -143,13 +150,13 @@ class _VideoPostState extends State<VideoPost>
               ),
             ),
           ),
-          const Positioned(
+          Positioned(
             bottom: 20,
             left: 16,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   '@JW',
                   style: TextStyle(
                     color: Colors.white,
@@ -159,8 +166,8 @@ class _VideoPostState extends State<VideoPost>
                 ),
                 Gaps.v8,
                 Text(
-                  'Movie Trailer',
-                  style: TextStyle(
+                  'yeonjae_${widget.videoIndex}',
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: Sizes.size12,
                   ),

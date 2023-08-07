@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:tiktok_v2/features/videos/widgets/video_post.dart';
 
 class VideoTimelineScreen extends StatefulWidget {
-  const VideoTimelineScreen({super.key});
+  const VideoTimelineScreen({
+    super.key,
+    required this.isActivated,
+  });
+
+  final bool isActivated;
 
   @override
   State<VideoTimelineScreen> createState() => _VideoTimelineScreenState();
@@ -67,6 +72,7 @@ class _VideoTimelineScreenState extends State<VideoTimelineScreen> {
         itemCount: _itemCount,
         itemBuilder: (context, index) {
           return VideoPost(
+            isActivated: widget.isActivated,
             onVideoFinished: _onVideoFinished,
             videoIndex: index,
           );
