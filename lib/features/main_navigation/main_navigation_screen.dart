@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_v2/constants/gaps.dart';
+import 'package:tiktok_v2/features/discover/discover_screen.dart';
 import 'package:tiktok_v2/features/main_navigation/widgets/navigation_tab.dart';
 import 'package:tiktok_v2/features/main_navigation/widgets/record_video_button.dart';
 import 'package:tiktok_v2/features/videos/video_timeline_screen.dart';
@@ -14,9 +15,11 @@ class MainNavigationScreen extends StatefulWidget {
 
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
   int _currentIndex = 0;
+  bool _isHomeTab = true;
 
   void _onBottomNavigationTap(int tab) {
     _currentIndex = tab;
+    _isHomeTab = (tab == 0);
     setState(() {});
   }
 
@@ -47,7 +50,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           ),
           Offstage(
             offstage: _currentIndex != 1,
-            child: const Center(child: Text('Discover')),
+            child: const DiscoverScreen(),
           ),
           Offstage(
             offstage: _currentIndex != 3,
@@ -60,7 +63,8 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
         ],
       ),
       bottomNavigationBar: BottomAppBar(
-          color: Colors.black,
+          color: _isHomeTab ? Colors.black : Colors.white,
+          surfaceTintColor: Colors.white,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,6 +74,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 selectedIcon: FontAwesomeIcons.house,
                 lable: 'Home',
                 isSelected: _currentIndex == 0,
+                isHomeTab: _isHomeTab,
                 onTap: () => _onBottomNavigationTap(0),
               ),
               NavigationTab(
@@ -77,12 +82,15 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 selectedIcon: FontAwesomeIcons.solidCompass,
                 lable: 'Discover',
                 isSelected: _currentIndex == 1,
+                isHomeTab: _isHomeTab,
                 onTap: () => _onBottomNavigationTap(1),
               ),
               Gaps.h20,
               GestureDetector(
                 onTap: _onRecordVideoTap,
-                child: const RecordVideoButton(),
+                child: RecordVideoButton(
+                  isHomeTab: _isHomeTab,
+                ),
               ),
               Gaps.h20,
               NavigationTab(
@@ -90,6 +98,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 selectedIcon: FontAwesomeIcons.solidMessage,
                 lable: 'Inbox',
                 isSelected: _currentIndex == 3,
+                isHomeTab: _isHomeTab,
                 onTap: () => _onBottomNavigationTap(3),
               ),
               NavigationTab(
@@ -97,6 +106,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 selectedIcon: FontAwesomeIcons.solidUser,
                 lable: 'Profile',
                 isSelected: _currentIndex == 4,
+                isHomeTab: _isHomeTab,
                 onTap: () => _onBottomNavigationTap(4),
               ),
             ],

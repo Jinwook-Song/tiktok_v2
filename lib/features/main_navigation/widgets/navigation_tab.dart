@@ -9,12 +9,14 @@ class NavigationTab extends StatelessWidget {
     required this.icon,
     required this.selectedIcon,
     required this.isSelected,
+    required this.isHomeTab,
     required this.onTap,
   });
   final String lable;
   final IconData icon;
   final IconData selectedIcon;
   final bool isSelected;
+  final bool isHomeTab;
   final void Function() onTap;
 
   @override
@@ -30,13 +32,13 @@ class NavigationTab extends StatelessWidget {
             children: [
               Icon(
                 isSelected ? selectedIcon : icon,
-                color: Colors.white,
+                color: isHomeTab ? Colors.white : Colors.black,
               ),
               Gaps.v4,
               Text(
                 lable,
-                style: const TextStyle(
-                  color: Colors.white,
+                style: TextStyle(
+                  color: isHomeTab ? Colors.white : Colors.black,
                   fontSize: Sizes.size10,
                 ),
               ),

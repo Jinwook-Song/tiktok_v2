@@ -5,7 +5,10 @@ import 'package:tiktok_v2/constants/sizes.dart';
 class RecordVideoButton extends StatelessWidget {
   const RecordVideoButton({
     super.key,
+    required this.isHomeTab,
   });
+
+  final bool isHomeTab;
 
   @override
   Widget build(BuildContext context) {
@@ -38,13 +41,13 @@ class RecordVideoButton extends StatelessWidget {
           height: 28,
           padding: const EdgeInsets.symmetric(horizontal: Sizes.size10),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: isHomeTab ? Colors.white : Colors.black,
             borderRadius: BorderRadius.circular(Sizes.size6),
           ),
-          child: const Center(
+          child: Center(
             child: Icon(
               FontAwesomeIcons.plus,
-              color: Colors.black,
+              color: isHomeTab ? Colors.black : Colors.white,
               size: 18,
             ),
           ),
