@@ -50,6 +50,8 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // keyboard에 의해 스크린 사이즈가 제조정되지 않도록
+      resizeToAvoidBottomInset: false,
       backgroundColor: _currentIndex == 0 ? Colors.black : Colors.white,
       body: Stack(
         children: [
