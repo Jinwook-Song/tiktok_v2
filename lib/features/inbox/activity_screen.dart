@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tiktok_v2/constants/gaps.dart';
 import 'package:tiktok_v2/constants/sizes.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
@@ -10,12 +11,42 @@ class ActivityScreen extends StatefulWidget {
   State<ActivityScreen> createState() => _ActivityScreenState();
 }
 
-class _ActivityScreenState extends State<ActivityScreen> {
+class _ActivityScreenState extends State<ActivityScreen>
+    with SingleTickerProviderStateMixin {
   bool _dismissed = false;
   final List<String> _notifications = List.generate(
     20,
     (index) => '${index}h',
   );
+
+  bool _showTopSheet = false;
+  late final AnimationController _animationController = AnimationController(
+    vsync: this,
+    duration: const Duration(
+      milliseconds: 150,
+    ),
+  );
+
+  late final Animation<double> _animation = Tween(
+    begin: 0.0,
+    end: 0.5,
+  ).animate(_animationController);
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  void _onTitleTap() {
+    if (_showTopSheet) {
+      _animationController.reverse();
+    } else {
+      _animationController.forward();
+    }
+    _showTopSheet = !_showTopSheet;
+    setState(() {});
+  }
 
   void _onDismissed(String notification) {
     _notifications.removeWhere((element) => element == notification);
@@ -26,7 +57,23 @@ class _ActivityScreenState extends State<ActivityScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('All activity'),
+        title: GestureDetector(
+          onTap: _onTitleTap,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text('All activity'),
+              Gaps.h2,
+              RotationTransition(
+                turns: _animation,
+                child: const FaIcon(
+                  FontAwesomeIcons.chevronDown,
+                  size: Sizes.size12,
+                ),
+              )
+            ],
+          ),
+        ),
       ),
       body: ListView(
         children: [
