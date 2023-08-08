@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_v2/constants/gaps.dart';
 import 'package:tiktok_v2/features/discover/discover_screen.dart';
+import 'package:tiktok_v2/features/inbox/inbox_screen.dart';
 import 'package:tiktok_v2/features/main_navigation/widgets/navigation_tab.dart';
 import 'package:tiktok_v2/features/main_navigation/widgets/record_video_button.dart';
 import 'package:tiktok_v2/features/videos/video_timeline_screen.dart';
@@ -14,8 +15,8 @@ class MainNavigationScreen extends StatefulWidget {
 }
 
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
-  int _currentIndex = 0;
-  bool _isHomeTab = true;
+  int _currentIndex = 3;
+  bool _isHomeTab = false;
 
   void _onBottomNavigationTap(int tab) {
     _currentIndex = tab;
@@ -57,7 +58,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           ),
           Offstage(
             offstage: _currentIndex != 3,
-            child: const Center(child: Text('Inbox')),
+            child: const InboxScreen(),
           ),
           Offstage(
             offstage: _currentIndex != 4,
