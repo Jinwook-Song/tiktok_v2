@@ -21,55 +21,82 @@ class ActivityScreen extends StatelessWidget {
             child: Text(
               'New',
               style: TextStyle(
-                color: Colors.grey.shade500,
-                fontSize: Sizes.size12,
+                  color: Colors.grey.shade500,
+                  fontSize: Sizes.size12,
+                  fontWeight: FontWeight.w600),
+            ),
+          ),
+          Dismissible(
+            key: const Key('alert'),
+            background: Container(
+              padding: const EdgeInsets.only(
+                left: Sizes.size20,
+              ),
+              alignment: Alignment.centerLeft,
+              color: Colors.green,
+              child: const FaIcon(
+                FontAwesomeIcons.check,
+                size: Sizes.size20,
+                color: Colors.white,
+              ),
+            ),
+            secondaryBackground: Container(
+              padding: const EdgeInsets.only(
+                right: Sizes.size20,
+              ),
+              alignment: Alignment.centerRight,
+              color: Colors.red,
+              child: const FaIcon(
+                FontAwesomeIcons.trashCan,
+                size: Sizes.size20,
+                color: Colors.white,
+              ),
+            ),
+            child: ListTile(
+              leading: Container(
+                width: Sizes.size48,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.white,
+                  border: Border.all(
+                    color: Colors.grey.shade300,
+                  ),
+                ),
+                child: const Center(
+                  child: FaIcon(FontAwesomeIcons.bell),
+                ),
+              ),
+              title: RichText(
+                text: TextSpan(
+                  text: 'Account updates: ',
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w600,
+                    fontSize: Sizes.size14,
+                  ),
+                  children: [
+                    const TextSpan(
+                      text: 'Upload longer videos ',
+                      style: TextStyle(
+                        fontWeight: FontWeight.normal,
+                      ),
+                    ),
+                    TextSpan(
+                      text: '1h',
+                      style: TextStyle(
+                        fontWeight: FontWeight.normal,
+                        color: Colors.grey.shade400,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              trailing: const FaIcon(
+                FontAwesomeIcons.chevronRight,
+                size: Sizes.size14,
               ),
             ),
           ),
-          ListTile(
-            leading: Container(
-              width: Sizes.size48,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.white,
-                border: Border.all(
-                  color: Colors.grey.shade300,
-                ),
-              ),
-              child: const Center(
-                child: FaIcon(FontAwesomeIcons.bell),
-              ),
-            ),
-            title: RichText(
-              text: TextSpan(
-                text: 'Account updates: ',
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.w600,
-                  fontSize: Sizes.size14,
-                ),
-                children: [
-                  const TextSpan(
-                    text: 'Upload longer videos ',
-                    style: TextStyle(
-                      fontWeight: FontWeight.normal,
-                    ),
-                  ),
-                  TextSpan(
-                    text: '1h',
-                    style: TextStyle(
-                      fontWeight: FontWeight.normal,
-                      color: Colors.grey.shade400,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            trailing: const FaIcon(
-              FontAwesomeIcons.chevronRight,
-              size: Sizes.size14,
-            ),
-          )
         ],
       ),
     );
