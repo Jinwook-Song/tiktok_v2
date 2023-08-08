@@ -15,25 +15,27 @@ class TikTokApp extends StatelessWidget {
     return MaterialApp(
         title: 'TikTok',
         theme: ThemeData(
-            useMaterial3: true,
-            colorScheme: ColorScheme.fromSeed(
-              seedColor: const Color(0xFFE9435A),
+          useMaterial3: true,
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: const Color(0xFFE9435A),
+          ),
+          appBarTheme: const AppBarTheme(
+              foregroundColor: Colors.black,
+              backgroundColor: Colors.white,
+              titleTextStyle: TextStyle(
+                color: Colors.black,
+                fontSize: Sizes.size16,
+                fontWeight: FontWeight.w700,
+              )),
+          scaffoldBackgroundColor: Colors.white,
+          inputDecorationTheme: InputDecorationTheme(
+            hintStyle: TextStyle(
+              color: Colors.grey.shade400,
+              fontWeight: FontWeight.w400,
             ),
-            appBarTheme: const AppBarTheme(
-                foregroundColor: Colors.black,
-                backgroundColor: Colors.white,
-                titleTextStyle: TextStyle(
-                  color: Colors.black,
-                  fontSize: Sizes.size16,
-                  fontWeight: FontWeight.w700,
-                )),
-            scaffoldBackgroundColor: Colors.white,
-            inputDecorationTheme: InputDecorationTheme(
-              hintStyle: TextStyle(
-                color: Colors.grey.shade400,
-                fontWeight: FontWeight.w400,
-              ),
-            )),
+          ),
+          splashColor: Colors.transparent,
+        ),
         home: const MainNavigationScreen());
   }
 }
