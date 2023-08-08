@@ -64,15 +64,20 @@ class _ActivityScreenState extends State<ActivityScreen>
     end: const Offset(0, 0),
   ).animate(_animationController);
 
+  late final Animation<Color?> _barrierAnimation = ColorTween(
+    begin: Colors.transparent,
+    end: Colors.black.withOpacity(0.7),
+  ).animate(_animationController);
+
   @override
   void dispose() {
     _animationController.dispose();
     super.dispose();
   }
 
-  void _onTitleTap() {
+  void _onToggleShowTopPanel() async {
     if (_showTopPannel) {
-      _animationController.reverse();
+      await _animationController.reverse();
     } else {
       _animationController.forward();
     }
@@ -90,7 +95,7 @@ class _ActivityScreenState extends State<ActivityScreen>
     return Scaffold(
       appBar: AppBar(
         title: GestureDetector(
-          onTap: _onTitleTap,
+          onTap: _onToggleShowTopPanel,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -263,6 +268,12 @@ class _ActivityScreenState extends State<ActivityScreen>
                 ),
             ],
           ),
+          if (_showTopPannel)
+            AnimatedModalBarrier(
+              color: _barrierAnimation,
+              dismissible: true,
+              onDismiss: _onToggleShowTopPanel,
+            ),
           SlideTransition(
             position: _pannelAnimation,
             child: Container(
@@ -304,7 +315,7 @@ class _ActivityScreenState extends State<ActivityScreen>
                 ],
               ),
             ),
-          )
+          ),
         ],
       ),
     );
