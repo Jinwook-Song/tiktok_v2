@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_v2/constants/gaps.dart';
@@ -56,6 +57,8 @@ class _VideoPostState extends State<VideoPost>
   void _initVideoPlayer() async {
     await _videoPlayerController.initialize();
     await _videoPlayerController.setLooping(true);
+    // 웹에서는 음성이 있는 영상의 최초 자동 재생을 허용하지 않는다
+    if (kIsWeb) await _videoPlayerController.setVolume(0);
     setState(() {});
 
     _videoPlayerController.addListener(_onVideoChanged);
