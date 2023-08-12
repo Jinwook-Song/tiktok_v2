@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -42,24 +43,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
             title: const Text(
               'Enable notifications (Checkbox)',
             ),
-          ),
-          ListTile(
-            onTap: () => showAboutDialog(
-              context: context,
-              applicationVersion: '1.0.0',
-              applicationLegalese: 'All rights reserved.',
-            ),
-            title: const Text('About'),
-            subtitle: Text(
-              'About this app...',
-              style: TextStyle(
-                color: Colors.grey.shade500,
-              ),
-            ),
-          ),
-          const AboutListTile(
-            applicationVersion: '1.0.0',
-            applicationLegalese: 'All rights reserved.',
           ),
           ListTile(
             onTap: () async {
@@ -115,6 +98,110 @@ class _SettingsScreenState extends State<SettingsScreen> {
               if (kDebugMode) print(booking);
             },
             title: const Text('What is your birthday?'),
+          ),
+          ListTile(
+            onTap: () => showCupertinoDialog(
+              context: context,
+              builder: (context) => CupertinoAlertDialog(
+                title: const Text(
+                  'Are you sure?',
+                ),
+                content: const Text('You can sign up later'),
+                actions: [
+                  CupertinoDialogAction(
+                    onPressed: () => Navigator.of(context).pop(),
+                    isDestructiveAction: false,
+                    child: const Text(
+                      'No',
+                      style: TextStyle(
+                        color: Colors.blue,
+                      ),
+                    ),
+                  ),
+                  CupertinoDialogAction(
+                    onPressed: () => Navigator.of(context).pop(),
+                    isDestructiveAction: true,
+                    child: const Text('Yes'),
+                  ),
+                ],
+              ),
+            ),
+            title: const Text(
+              'Log out (IOS)',
+              style: TextStyle(
+                color: Colors.red,
+              ),
+            ),
+          ),
+          ListTile(
+            onTap: () => showDialog(
+              context: context,
+              builder: (context) {
+                return Theme(
+                  data: ThemeData(
+                    colorScheme: ColorScheme.fromSeed(
+                      seedColor: Colors.white,
+                    ),
+                  ),
+                  child: AlertDialog(
+                    title: const Text(
+                      'Are you sure?',
+                    ),
+                    content: const Text('You can sign up later'),
+                    actions: [
+                      GestureDetector(
+                        onTap: () => Navigator.of(context).pop(),
+                        child: const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text(
+                            'No',
+                            style: TextStyle(
+                              color: Colors.blue,
+                            ),
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () => Navigator.of(context).pop(),
+                        child: const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text(
+                            'Yes',
+                            style: TextStyle(
+                              color: Colors.red,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+            title: const Text(
+              'Log out (AOS)',
+              style: TextStyle(
+                color: Colors.red,
+              ),
+            ),
+          ),
+          ListTile(
+            onTap: () => showAboutDialog(
+              context: context,
+              applicationVersion: '1.0.0',
+              applicationLegalese: 'All rights reserved.',
+            ),
+            title: const Text('About'),
+            subtitle: Text(
+              'About this app...',
+              style: TextStyle(
+                color: Colors.grey.shade500,
+              ),
+            ),
+          ),
+          const AboutListTile(
+            applicationVersion: '1.0.0',
+            applicationLegalese: 'All rights reserved.',
           ),
         ],
       ),
