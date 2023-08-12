@@ -1,8 +1,23 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class SettingsScreen extends StatelessWidget {
+class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
+
+  @override
+  State<SettingsScreen> createState() => _SettingsScreenState();
+}
+
+class _SettingsScreenState extends State<SettingsScreen> {
+  bool _notification = false;
+
+  void _onNotificationChanged(bool? notification) {
+    if (notification != null) {
+      setState(() {
+        _notification = notification;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -12,6 +27,22 @@ class SettingsScreen extends StatelessWidget {
       ),
       body: ListView(
         children: [
+          SwitchListTile.adaptive(
+            value: _notification,
+            onChanged: _onNotificationChanged,
+            activeColor: Theme.of(context).primaryColor,
+            title: const Text(
+              'Enable notifications (Switch)',
+            ),
+          ),
+          CheckboxListTile.adaptive(
+            value: _notification,
+            onChanged: _onNotificationChanged,
+            activeColor: Theme.of(context).primaryColor,
+            title: const Text(
+              'Enable notifications (Checkbox)',
+            ),
+          ),
           ListTile(
             onTap: () => showAboutDialog(
               context: context,
