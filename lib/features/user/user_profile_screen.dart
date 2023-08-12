@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_v2/constants/gaps.dart';
 import 'package:tiktok_v2/constants/sizes.dart';
+import 'package:tiktok_v2/features/settings/settings_screen.dart';
 import 'package:tiktok_v2/features/user/widgets/persistent_tab_bar.dart';
 
 class UserProfileScreen extends StatefulWidget {
@@ -14,6 +15,12 @@ class UserProfileScreen extends StatefulWidget {
 class _UserProfileScreenState extends State<UserProfileScreen> {
   @override
   Widget build(BuildContext context) {
+    void _onSettingsTap() {
+      Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => const SettingsScreen(),
+      ));
+    }
+
     return SafeArea(
       child: DefaultTabController(
         length: 2,
@@ -24,7 +31,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 title: const Text('Jinwook'),
                 actions: [
                   IconButton(
-                    onPressed: () {},
+                    onPressed: _onSettingsTap,
                     icon: const FaIcon(
                       FontAwesomeIcons.gear,
                       size: Sizes.size20,
