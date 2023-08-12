@@ -13,14 +13,14 @@ class UserProfileScreen extends StatefulWidget {
 }
 
 class _UserProfileScreenState extends State<UserProfileScreen> {
+  void _onSettingsTap() {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => const SettingsScreen(),
+    ));
+  }
+
   @override
   Widget build(BuildContext context) {
-    void _onSettingsTap() {
-      Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => const SettingsScreen(),
-      ));
-    }
-
     return SafeArea(
       child: DefaultTabController(
         length: 2,
