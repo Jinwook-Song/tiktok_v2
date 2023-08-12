@@ -33,6 +33,7 @@ class _VideoPostState extends State<VideoPost>
   late AnimationController _animationController;
 
   bool _isPaused = false;
+  bool _isMuted = false;
   final _animationDuration = const Duration(milliseconds: 150);
 
   @override
@@ -58,7 +59,10 @@ class _VideoPostState extends State<VideoPost>
     await _videoPlayerController.initialize();
     await _videoPlayerController.setLooping(true);
     // 웹에서는 음성이 있는 영상의 최초 자동 재생을 허용하지 않는다
-    if (kIsWeb) await _videoPlayerController.setVolume(0);
+    if (kIsWeb) {
+      await _videoPlayerController.setVolume(0);
+      _isMuted = true;
+    }
     setState(() {});
 
     _videoPlayerController.addListener(_onVideoChanged);
@@ -97,6 +101,17 @@ class _VideoPostState extends State<VideoPost>
       _isPaused = false;
     }
 
+    setState(() {});
+  }
+
+  void _toggleMute() {
+    if (_isMuted) {
+      _isMuted = false;
+      _videoPlayerController.setVolume(1);
+    } else {
+      _isMuted = true;
+      _videoPlayerController.setVolume(0);
+    }
     setState(() {});
   }
 
@@ -191,6 +206,21 @@ class _VideoPostState extends State<VideoPost>
                   foregroundImage: NetworkImage(
                       'https://avatars.githubusercontent.com/u/78011042?v=4'),
                   child: Text('JW'),
+                ),
+                Gaps.v20,
+                IconButton(
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onPressed: _toggleMute,
+                  icon: _isMuted
+                      ? const Icon(
+                          FontAwesomeIcons.volumeXmark,
+                          color: Colors.white,
+                        )
+                      : const Icon(
+                          FontAwesomeIcons.volumeHigh,
+                          color: Colors.white,
+                        ),
                 ),
                 Gaps.v20,
                 const VideoButton(
