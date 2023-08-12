@@ -36,6 +36,7 @@ class TikTokApp extends StatelessWidget {
               fontWeight: FontWeight.w400,
             ),
           ),
+          tabBarTheme: const TabBarTheme(dividerColor: Colors.transparent),
           splashColor: Colors.transparent,
         ),
         home: const MainNavigationScreen());
