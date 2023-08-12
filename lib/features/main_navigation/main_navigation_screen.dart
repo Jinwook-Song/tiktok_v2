@@ -5,6 +5,7 @@ import 'package:tiktok_v2/features/discover/discover_screen.dart';
 import 'package:tiktok_v2/features/inbox/inbox_screen.dart';
 import 'package:tiktok_v2/features/main_navigation/widgets/navigation_tab.dart';
 import 'package:tiktok_v2/features/main_navigation/widgets/record_video_button.dart';
+import 'package:tiktok_v2/features/user/user_profile_screen.dart';
 import 'package:tiktok_v2/features/videos/video_timeline_screen.dart';
 
 class MainNavigationScreen extends StatefulWidget {
@@ -15,7 +16,7 @@ class MainNavigationScreen extends StatefulWidget {
 }
 
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
-  int _currentIndex = 3;
+  int _currentIndex = 4;
   bool _isHomeTab = false;
 
   void _onBottomNavigationTap(int tab) {
@@ -62,7 +63,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           ),
           Offstage(
             offstage: _currentIndex != 4,
-            child: const Center(child: Text('Profile')),
+            child: const UserProfileScreen(),
           ),
         ],
       ),
