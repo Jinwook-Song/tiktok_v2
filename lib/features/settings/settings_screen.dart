@@ -127,7 +127,74 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
             ),
             title: const Text(
-              'Log out (IOS)',
+              'Log out (IOS / Dialog)',
+              style: TextStyle(
+                color: Colors.red,
+              ),
+            ),
+          ),
+          ListTile(
+            onTap: () => showCupertinoModalPopup(
+              context: context,
+              builder: (context) => CupertinoAlertDialog(
+                title: const Text(
+                  'Are you sure?',
+                ),
+                content: const Text('You can sign up later'),
+                actions: [
+                  CupertinoDialogAction(
+                    onPressed: () => Navigator.of(context).pop(),
+                    isDestructiveAction: false,
+                    child: const Text(
+                      'No',
+                      style: TextStyle(
+                        color: Colors.blue,
+                      ),
+                    ),
+                  ),
+                  CupertinoDialogAction(
+                    onPressed: () => Navigator.of(context).pop(),
+                    isDestructiveAction: true,
+                    child: const Text('Yes'),
+                  ),
+                ],
+              ),
+            ),
+            title: const Text(
+              'Log out (IOS / Popup)',
+              style: TextStyle(
+                color: Colors.red,
+              ),
+            ),
+          ),
+          ListTile(
+            onTap: () => showCupertinoModalPopup(
+              context: context,
+              builder: (context) => CupertinoActionSheet(
+                title: const Text(
+                  'Are you sure?',
+                ),
+                actions: [
+                  CupertinoActionSheetAction(
+                    onPressed: () => Navigator.of(context).pop(),
+                    isDestructiveAction: false,
+                    child: const Text(
+                      'No',
+                      style: TextStyle(
+                        color: Colors.blue,
+                      ),
+                    ),
+                  ),
+                  CupertinoActionSheetAction(
+                    onPressed: () => Navigator.of(context).pop(),
+                    isDestructiveAction: true,
+                    child: const Text('Yes'),
+                  ),
+                ],
+              ),
+            ),
+            title: const Text(
+              'Log out (IOS / Bottom sheet)',
               style: TextStyle(
                 color: Colors.red,
               ),
