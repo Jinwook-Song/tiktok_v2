@@ -27,69 +27,94 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: Sizes.size40,
-          ),
-          child: Column(
-            children: [
-              Gaps.v80,
-              const Text(
-                'Sign up for TikTok',
-                style: TextStyle(
-                  fontSize: Sizes.size28,
-                  fontWeight: FontWeight.w700,
-                ),
+    return OrientationBuilder(
+      builder: (context, orientation) {
+        return Scaffold(
+          body: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: Sizes.size40,
               ),
-              Gaps.v20,
-              const Text(
-                'Create a profile, follow other accounts, make your own videos, and more.',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: Sizes.size16,
-                  color: Colors.black38,
-                ),
+              child: Column(
+                children: [
+                  Gaps.v80,
+                  const Text(
+                    'Sign up for TikTok',
+                    style: TextStyle(
+                      fontSize: Sizes.size28,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  Gaps.v20,
+                  const Text(
+                    'Create a profile, follow other accounts, make your own videos, and more.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: Sizes.size16,
+                      color: Colors.black38,
+                    ),
+                  ),
+                  Gaps.v40,
+                  if (orientation == Orientation.portrait) ...[
+                    AuthButton(
+                      text: 'Use email & password',
+                      icon: const Icon(FontAwesomeIcons.user),
+                      onAuthButtonTap: () => _onEmailTap(context),
+                    ),
+                    Gaps.v16,
+                    const AuthButton(
+                      text: 'Continue with Apple',
+                      icon: Icon(FontAwesomeIcons.apple),
+                    ),
+                  ],
+                  if (orientation == Orientation.landscape)
+                    Row(
+                      children: [
+                        Expanded(
+                          child: AuthButton(
+                            text: 'Use email & password',
+                            icon: const Icon(FontAwesomeIcons.user),
+                            onAuthButtonTap: () => _onEmailTap(context),
+                          ),
+                        ),
+                        Gaps.h16,
+                        const Expanded(
+                          child: AuthButton(
+                            text: 'Continue with Apple',
+                            icon: Icon(FontAwesomeIcons.apple),
+                          ),
+                        ),
+                      ],
+                    )
+                ],
               ),
-              Gaps.v40,
-              AuthButton(
-                text: 'Use email & password',
-                icon: const Icon(FontAwesomeIcons.user),
-                onAuthButtonTap: () => _onEmailTap(context),
-              ),
-              Gaps.v16,
-              const AuthButton(
-                text: 'Continue with Apple',
-                icon: Icon(FontAwesomeIcons.apple),
-              ),
-            ],
-          ),
-        ),
-      ),
-      bottomNavigationBar: BottomAppBar(
-        surfaceTintColor: Colors.grey.shade200,
-        elevation: 5,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              'Already have an account?',
             ),
-            Gaps.h10,
-            GestureDetector(
-              onTap: () => _onLoginTap(context),
-              child: Text(
-                'Log in',
-                style: TextStyle(
-                  color: Theme.of(context).primaryColor,
-                  fontWeight: FontWeight.w600,
+          ),
+          bottomNavigationBar: BottomAppBar(
+            surfaceTintColor: Colors.grey.shade200,
+            elevation: 5,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  'Already have an account?',
                 ),
-              ),
+                Gaps.h10,
+                GestureDetector(
+                  onTap: () => _onLoginTap(context),
+                  child: Text(
+                    'Log in',
+                    style: TextStyle(
+                      color: Theme.of(context).primaryColor,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tiktok_v2/constants/sizes.dart';
-import 'package:tiktok_v2/features/main_navigation/main_navigation_screen.dart';
+import 'package:tiktok_v2/features/authentication/sign_up_screen.dart';
 
 void main() {
   runApp(const TikTokApp());
@@ -14,6 +14,7 @@ class TikTokApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'TikTok',
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
           useMaterial3: true,
           colorScheme: ColorScheme.fromSeed(
@@ -41,6 +42,6 @@ class TikTokApp extends StatelessWidget {
           ),
           splashColor: Colors.transparent,
         ),
-        home: const MainNavigationScreen());
+        home: const SignUpScreen());
   }
 }
