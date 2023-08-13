@@ -56,3 +56,34 @@ class TikTokApp extends StatelessWidget {
         home: const MainNavigationScreen());
   }
 }
+
+/* Layout builder는 해당 위젯이 가질 수 있는 최대 크기를 알 있다.
+class LayoutBuilderCodeLab extends StatelessWidget {
+  const LayoutBuilderCodeLab({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    return Scaffold(
+      body: FractionallySizedBox(
+        widthFactor: 1 / 2,
+        child: LayoutBuilder(
+          builder: (context, constraints) => Container(
+            width: constraints.maxWidth,
+            height: constraints.maxHeight,
+            color: Colors.amber,
+            alignment: Alignment.center,
+            child: Text(
+              '$width / ${constraints.maxWidth}',
+              style: const TextStyle(
+                fontSize: Sizes.size20,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+*/
