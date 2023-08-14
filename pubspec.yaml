@@ -40,6 +40,7 @@ dependencies:
   video_player: ^2.7.0
   visibility_detector: ^0.4.0+2
   flutter_slidable: ^3.0.0
+  google_fonts: ^5.1.0
 
 dev_dependencies:
   flutter_test:

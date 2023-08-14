@@ -31,21 +31,17 @@ class LoginScreen extends StatelessWidget {
           child: Column(
             children: [
               Gaps.v80,
-              const Text(
+              Text(
                 'Log in to TikTok',
-                style: TextStyle(
-                  fontSize: Sizes.size28,
-                  fontWeight: FontWeight.w700,
-                ),
+                style: Theme.of(context).textTheme.headlineLarge,
               ),
               Gaps.v20,
-              const Text(
+              Text(
                 'Manage your account, check notifications, comment on videos, and more.',
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: Sizes.size16,
-                  color: Colors.black38,
-                ),
+                style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                      color: Colors.grey.shade500,
+                    ),
               ),
               Gaps.v40,
               GestureDetector(

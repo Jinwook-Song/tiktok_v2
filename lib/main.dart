@@ -29,6 +29,15 @@ class TikTokApp extends StatelessWidget {
         themeMode: ThemeMode.system,
         theme: ThemeData(
           useMaterial3: true,
+          textTheme: const TextTheme(
+            headlineLarge: TextStyle(
+              fontSize: Sizes.size28,
+              fontWeight: FontWeight.w700,
+            ),
+            titleLarge: TextStyle(
+              fontSize: Sizes.size16,
+            ),
+          ),
           colorScheme: ColorScheme.fromSeed(
             brightness: Brightness.light,
             seedColor: const Color(0xFFE9435A),
@@ -62,6 +71,15 @@ class TikTokApp extends StatelessWidget {
         ),
         darkTheme: ThemeData(
           useMaterial3: true,
+          textTheme: const TextTheme(
+            headlineLarge: TextStyle(
+              fontSize: Sizes.size28,
+              fontWeight: FontWeight.w700,
+            ),
+            titleLarge: TextStyle(
+              fontSize: Sizes.size16,
+            ),
+          ),
           colorScheme: ColorScheme.fromSeed(
             brightness: Brightness.dark,
             seedColor: const Color(0xFFE9435A),
