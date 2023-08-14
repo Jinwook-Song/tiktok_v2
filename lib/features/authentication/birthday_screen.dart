@@ -48,67 +48,68 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Sign up'),
-        surfaceTintColor: Colors.white,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(Sizes.size28),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'When\'s your birthday?',
-              style: TextStyle(
-                fontSize: Sizes.size20,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            Gaps.v8,
-            Text(
-              'Your birthday won\'t be shown publicly.',
-              style: TextStyle(
-                color: Colors.grey.shade500,
-              ),
-            ),
-            Gaps.v20,
-            TextField(
-              controller: _birthdayController,
-              autofocus: true,
-              enabled: false,
-              style: const TextStyle(color: Colors.black),
-              decoration: InputDecoration(
-                hintStyle: TextStyle(
-                  color: Colors.grey.shade400,
-                  fontWeight: FontWeight.w400,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(Sizes.size28),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'When\'s your birthday?',
+                style: TextStyle(
+                  fontSize: Sizes.size20,
+                  fontWeight: FontWeight.w600,
                 ),
-                enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.grey.shade300,
+              ),
+              Gaps.v8,
+              Text(
+                'Your birthday won\'t be shown publicly.',
+                style: TextStyle(
+                  color: Colors.grey.shade500,
+                ),
+              ),
+              Gaps.v20,
+              TextField(
+                controller: _birthdayController,
+                autofocus: true,
+                enabled: false,
+                decoration: InputDecoration(
+                  hintStyle: TextStyle(
+                    color: Colors.grey.shade400,
+                    fontWeight: FontWeight.w400,
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.grey.shade300,
+                    ),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.grey.shade300,
+                      width: Sizes.size2,
+                    ),
                   ),
                 ),
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.grey.shade300,
-                    width: Sizes.size2,
-                  ),
+              ),
+              Gaps.v20,
+              GestureDetector(
+                onTap: _onNextTap,
+                child: const FormButton(disabled: false),
+              ),
+              Gaps.v60,
+              SizedBox(
+                height: 300,
+                child: CupertinoDatePicker(
+                  mode: CupertinoDatePickerMode.date,
+                  initialDateTime: today,
+                  maximumDate: today,
+                  onDateTimeChanged: _convertDateTimeToString,
                 ),
               ),
-            ),
-            Gaps.v20,
-            GestureDetector(
-              onTap: _onNextTap,
-              child: const FormButton(disabled: false),
-            ),
-            Gaps.v60,
-            SizedBox(
-              height: 300,
-              child: CupertinoDatePicker(
-                mode: CupertinoDatePickerMode.date,
-                initialDateTime: today,
-                maximumDate: today,
-                onDateTimeChanged: _convertDateTimeToString,
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

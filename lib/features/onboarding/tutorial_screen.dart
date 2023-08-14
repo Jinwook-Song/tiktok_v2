@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:tiktok_v2/constants/gaps.dart';
 import 'package:tiktok_v2/constants/sizes.dart';
 import 'package:tiktok_v2/features/main_navigation/main_navigation_screen.dart';
+import 'package:tiktok_v2/utils.dart';
 
 enum Direction { left, right }
 
@@ -75,7 +76,7 @@ class _TutorialScreenState extends State<TutorialScreen> {
                           'Videos are personalized for you based on what you watch, like, and share.',
                           style: TextStyle(
                             fontSize: Sizes.size16,
-                            color: Colors.grey.shade800,
+                            color: Colors.grey.shade500,
                           ),
                         ),
                       ],
@@ -100,7 +101,7 @@ class _TutorialScreenState extends State<TutorialScreen> {
                           'Videos are personalized for you based on what you watch, like, and share.',
                           style: TextStyle(
                             fontSize: Sizes.size16,
-                            color: Colors.grey.shade800,
+                            color: Colors.grey.shade500,
                           ),
                         ),
                       ],
@@ -112,14 +113,20 @@ class _TutorialScreenState extends State<TutorialScreen> {
                   duration: const Duration(milliseconds: 300))),
         ),
         bottomNavigationBar: BottomAppBar(
-          surfaceTintColor: Colors.white,
+          color: isDarkMode(context) ? Colors.black : Colors.white,
+          surfaceTintColor: isDarkMode(context) ? Colors.black : Colors.white,
           child: AnimatedOpacity(
             duration: const Duration(milliseconds: 150),
             opacity: _page == Page.first ? 0 : 1,
             child: CupertinoButton(
               onPressed: _onEnterAppTap,
               color: Theme.of(context).primaryColor,
-              child: const Text('Enjoy the app'),
+              child: const Text(
+                'Enjoy the app',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
             ),
           ),
         ),

@@ -123,7 +123,7 @@ class _InterestsScreenState extends State<InterestsScreen> {
                   'Get better video recommendations',
                   style: TextStyle(
                     fontSize: Sizes.size16,
-                    color: Colors.grey.shade800,
+                    color: Colors.grey.shade500,
                   ),
                 ),
                 Gaps.v64,
@@ -142,12 +142,16 @@ class _InterestsScreenState extends State<InterestsScreen> {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        surfaceTintColor: Colors.white,
         elevation: 1,
         child: CupertinoButton(
           onPressed: _onNextTap,
           color: Theme.of(context).primaryColor,
-          child: const Text('Next'),
+          child: const Text(
+            'Next',
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
         ),
       ),
     );

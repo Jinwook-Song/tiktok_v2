@@ -24,9 +24,6 @@ class InboxScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Inbox'),
-        backgroundColor: Colors.white,
-        surfaceTintColor: Colors.white,
-        shadowColor: Colors.black,
         elevation: 1,
         actions: [
           IconButton(
