@@ -33,13 +33,13 @@ class LoginScreen extends StatelessWidget {
               Gaps.v80,
               Text(
                 'Log in to TikTok',
-                style: Theme.of(context).textTheme.headlineLarge,
+                style: Theme.of(context).textTheme.titleLarge,
               ),
               Gaps.v20,
               Text(
                 'Manage your account, check notifications, comment on videos, and more.',
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                style: Theme.of(context).textTheme.titleMedium!.copyWith(
                       color: Colors.grey.shade500,
                     ),
               ),

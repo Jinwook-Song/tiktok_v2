@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:tiktok_v2/constants/sizes.dart';
 import 'package:tiktok_v2/features/authentication/sign_up_screen.dart';
 
@@ -29,15 +30,7 @@ class TikTokApp extends StatelessWidget {
         themeMode: ThemeMode.system,
         theme: ThemeData(
           useMaterial3: true,
-          textTheme: const TextTheme(
-            headlineLarge: TextStyle(
-              fontSize: Sizes.size28,
-              fontWeight: FontWeight.w700,
-            ),
-            titleLarge: TextStyle(
-              fontSize: Sizes.size16,
-            ),
-          ),
+          textTheme: GoogleFonts.itimTextTheme(),
           colorScheme: ColorScheme.fromSeed(
             brightness: Brightness.light,
             seedColor: const Color(0xFFE9435A),
@@ -71,15 +64,8 @@ class TikTokApp extends StatelessWidget {
         ),
         darkTheme: ThemeData(
           useMaterial3: true,
-          textTheme: const TextTheme(
-            headlineLarge: TextStyle(
-              fontSize: Sizes.size28,
-              fontWeight: FontWeight.w700,
-            ),
-            titleLarge: TextStyle(
-              fontSize: Sizes.size16,
-            ),
-          ),
+          textTheme: GoogleFonts.itimTextTheme(
+              ThemeData(brightness: Brightness.dark).textTheme),
           colorScheme: ColorScheme.fromSeed(
             brightness: Brightness.dark,
             seedColor: const Color(0xFFE9435A),

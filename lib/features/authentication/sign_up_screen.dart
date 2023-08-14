@@ -40,13 +40,13 @@ class SignUpScreen extends StatelessWidget {
                   Gaps.v80,
                   Text(
                     'Sign up for TikTok',
-                    style: Theme.of(context).textTheme.headlineLarge,
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
                   Gaps.v20,
                   Text(
                     'Create a profile, follow other accounts, make your own videos, and more.',
                     textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
                           color: Colors.grey.shade500,
                         ),
                   ),
