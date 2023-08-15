@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tiktok_v2/constants/sizes.dart';
-import 'package:tiktok_v2/features/authentication/sign_up_screen.dart';
+import 'package:tiktok_v2/features/main_navigation/main_navigation_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,79 +24,94 @@ class TikTokApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'TikTok',
-        debugShowCheckedModeBanner: false,
-        themeMode: ThemeMode.system,
-        theme: ThemeData(
-          useMaterial3: true,
-          textTheme: Typography.blackCupertino,
-          colorScheme: ColorScheme.fromSeed(
-            brightness: Brightness.light,
-            seedColor: const Color(0xFFE9435A),
-          ),
-          scaffoldBackgroundColor: Colors.white,
-          appBarTheme: const AppBarTheme(
-            foregroundColor: Colors.black,
-            shadowColor: Colors.black,
-            surfaceTintColor: Colors.white,
-            backgroundColor: Colors.white,
-            titleTextStyle: TextStyle(
-              color: Colors.black,
-              fontSize: Sizes.size16,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-          bottomAppBarTheme: BottomAppBarTheme(
-            color: Colors.grey.shade100,
-            surfaceTintColor: Colors.white,
-          ),
-          inputDecorationTheme: InputDecorationTheme(
-            hintStyle: TextStyle(
-              color: Colors.grey.shade500,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
-          tabBarTheme: const TabBarTheme(
-            dividerColor: Colors.transparent,
-          ),
-          splashColor: Colors.transparent,
+      title: 'TikTok',
+      debugShowCheckedModeBanner: false,
+      themeMode: ThemeMode.system,
+      theme: ThemeData(
+        useMaterial3: true,
+        textTheme: Typography.blackCupertino,
+        colorScheme: ColorScheme.fromSeed(
+          brightness: Brightness.light,
+          seedColor: const Color(0xFFE9435A),
         ),
-        darkTheme: ThemeData(
-          useMaterial3: true,
-          textTheme: Typography.whiteCupertino,
-          colorScheme: ColorScheme.fromSeed(
-            brightness: Brightness.dark,
-            seedColor: const Color(0xFFE9435A),
+        scaffoldBackgroundColor: Colors.white,
+        appBarTheme: const AppBarTheme(
+          foregroundColor: Colors.black,
+          shadowColor: Colors.black,
+          surfaceTintColor: Colors.white,
+          backgroundColor: Colors.white,
+          titleTextStyle: TextStyle(
+            color: Colors.black,
+            fontSize: Sizes.size16,
+            fontWeight: FontWeight.w700,
           ),
-          primaryColor: const Color(0xFFE9435A),
-          scaffoldBackgroundColor: Colors.black,
-          appBarTheme: const AppBarTheme(
-            foregroundColor: Colors.white,
-            shadowColor: Colors.white,
-            surfaceTintColor: Colors.black,
-            backgroundColor: Colors.black,
-            titleTextStyle: TextStyle(
-              color: Colors.white,
-              fontSize: Sizes.size16,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-          bottomAppBarTheme: BottomAppBarTheme(
-            color: Colors.grey.shade900,
-            surfaceTintColor: Colors.black,
-          ),
-          inputDecorationTheme: InputDecorationTheme(
-            hintStyle: TextStyle(
-              color: Colors.grey.shade500,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
-          tabBarTheme: const TabBarTheme(
-            dividerColor: Colors.transparent,
-          ),
-          splashColor: Colors.transparent,
         ),
-        home: const SignUpScreen(),);
+        bottomAppBarTheme: BottomAppBarTheme(
+          color: Colors.grey.shade100,
+          surfaceTintColor: Colors.white,
+        ),
+        inputDecorationTheme: InputDecorationTheme(
+          hintStyle: TextStyle(
+            color: Colors.grey.shade500,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+        tabBarTheme: TabBarTheme(
+          dividerColor: Colors.transparent,
+          indicatorColor: Colors.black,
+          unselectedLabelColor: Colors.grey.shade500,
+          labelColor: Colors.black,
+        ),
+        splashColor: Colors.transparent,
+      ),
+      darkTheme: ThemeData(
+        useMaterial3: true,
+        textTheme: Typography.whiteCupertino,
+        colorScheme: ColorScheme.fromSeed(
+          brightness: Brightness.dark,
+          seedColor: const Color(0xFFE9435A),
+        ),
+        primaryColor: const Color(0xFFE9435A),
+        scaffoldBackgroundColor: Colors.black,
+        appBarTheme: const AppBarTheme(
+          foregroundColor: Colors.white,
+          shadowColor: Colors.white,
+          surfaceTintColor: Colors.black,
+          backgroundColor: Colors.black,
+          titleTextStyle: TextStyle(
+            color: Colors.white,
+            fontSize: Sizes.size16,
+            fontWeight: FontWeight.w700,
+          ),
+          iconTheme: IconThemeData(color: Color.fromRGBO(255, 255, 255, 0.99)),
+          actionsIconTheme:
+              IconThemeData(color: Color.fromRGBO(255, 255, 255, 0.99)),
+        ),
+        iconTheme:
+            const IconThemeData(color: Color.fromRGBO(255, 255, 255, 0.99)),
+        listTileTheme: const ListTileThemeData(
+          iconColor: Colors.white,
+        ),
+        bottomAppBarTheme: BottomAppBarTheme(
+          color: Colors.grey.shade900,
+          surfaceTintColor: Colors.black,
+        ),
+        inputDecorationTheme: InputDecorationTheme(
+          hintStyle: TextStyle(
+            color: Colors.grey.shade500,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+        tabBarTheme: TabBarTheme(
+          dividerColor: Colors.transparent,
+          indicatorColor: Colors.white,
+          unselectedLabelColor: Colors.grey.shade500,
+          labelColor: Colors.white,
+        ),
+        splashColor: Colors.transparent,
+      ),
+      home: const MainNavigationScreen(),
+    );
   }
 }
 

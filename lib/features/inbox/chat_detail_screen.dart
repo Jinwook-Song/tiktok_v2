@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_v2/constants/gaps.dart';
 import 'package:tiktok_v2/constants/sizes.dart';
+import 'package:tiktok_v2/utils.dart';
 
 class ChatDetailScreen extends StatefulWidget {
   const ChatDetailScreen({super.key});
@@ -29,20 +30,21 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                 child: Text('니꼬'),
               ),
               Positioned(
-                  width: Sizes.size16,
-                  height: Sizes.size16,
-                  right: -2,
-                  bottom: -2,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: Colors.white,
-                        width: Sizes.size2,
-                      ),
-                      color: Colors.green,
+                width: Sizes.size16,
+                height: Sizes.size16,
+                right: 0,
+                bottom: 0,
+                child: Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: Colors.white,
+                      width: Sizes.size2,
                     ),
-                  ),)
+                    color: Colors.green,
+                  ),
+                ),
+              )
             ],
           ),
           title: const Text(
@@ -57,18 +59,18 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
               color: Colors.grey.shade500,
             ),
           ),
-          trailing: const Row(
+          trailing: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
               FaIcon(
                 FontAwesomeIcons.flag,
-                color: Colors.black,
+                color: isDarkMode(context) ? Colors.white : Colors.black,
                 size: Sizes.size20,
               ),
               Gaps.h32,
               FaIcon(
                 FontAwesomeIcons.ellipsis,
-                color: Colors.black,
+                color: isDarkMode(context) ? Colors.white : Colors.black,
                 size: Sizes.size20,
               ),
             ],
@@ -129,24 +131,29 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
             bottom: 0,
             width: MediaQuery.of(context).size.width,
             child: BottomAppBar(
-              surfaceTintColor: Colors.grey.shade100,
-              color: Colors.grey.shade100,
               child: Row(
                 children: [
                   Expanded(
-                      child: SizedBox(
-                    height: Sizes.size44,
-                    child: CupertinoTextField(
-                      padding: const EdgeInsets.all(Sizes.size10),
-                      placeholder: 'Send a message...',
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(
-                          18,
+                    child: SizedBox(
+                      height: Sizes.size44,
+                      child: CupertinoTextField(
+                        padding: const EdgeInsets.all(Sizes.size10),
+                        placeholder: 'Send a message...',
+                        style: TextStyle(
+                          color:
+                              isDarkMode(context) ? Colors.white : Colors.black,
+                        ),
+                        decoration: BoxDecoration(
+                          color: isDarkMode(context)
+                              ? Colors.grey.shade800
+                              : Colors.white,
+                          borderRadius: BorderRadius.circular(
+                            18,
+                          ),
                         ),
                       ),
                     ),
-                  ),),
+                  ),
                   Gaps.h20,
                   const SizedBox(
                     child: FaIcon(FontAwesomeIcons.paperPlane),

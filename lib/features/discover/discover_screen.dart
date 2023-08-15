@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_v2/constants/breakpoints.dart';
 import 'package:tiktok_v2/constants/gaps.dart';
 import 'package:tiktok_v2/constants/sizes.dart';
+import 'package:tiktok_v2/utils.dart';
 
 const tabs = [
   "Top",
@@ -66,6 +67,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
             controller: _textEditingController,
             onChanged: _onChanged,
             onSubmitted: _onSubmitted,
+            style: TextStyle(color: isDarkMode(context) ? Colors.white : null),
           ),
         ),
         bottom: TabBar(
@@ -73,13 +75,10 @@ class _DiscoverScreenState extends State<DiscoverScreen>
           splashFactory: NoSplash.splashFactory,
           padding: const EdgeInsets.symmetric(horizontal: Sizes.size16),
           isScrollable: true,
-          labelColor: Colors.black,
           labelStyle: const TextStyle(
             fontWeight: FontWeight.w600,
             fontSize: Sizes.size16,
           ),
-          unselectedLabelColor: Colors.grey.shade500,
-          indicatorColor: Colors.black,
           indicatorWeight: 1,
           indicatorSize: TabBarIndicatorSize.tab,
           dividerColor: Colors.grey.shade500,
@@ -115,7 +114,8 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                   aspectRatio: 9 / 16,
                   child: Container(
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(Sizes.size4),),
+                      borderRadius: BorderRadius.circular(Sizes.size4),
+                    ),
                     clipBehavior: Clip.hardEdge,
                     child: FadeInImage.assetNetwork(
                       fit: BoxFit.cover,
@@ -147,7 +147,8 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                       const CircleAvatar(
                         radius: Sizes.size12,
                         backgroundImage: NetworkImage(
-                            'https://avatars.githubusercontent.com/u/78011042?v=4',),
+                          'https://avatars.githubusercontent.com/u/78011042?v=4',
+                        ),
                       ),
                       Gaps.h6,
                       const Expanded(

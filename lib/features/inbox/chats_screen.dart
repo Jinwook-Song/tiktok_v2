@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_v2/constants/sizes.dart';
 import 'package:tiktok_v2/features/inbox/chat_detail_screen.dart';
+import 'package:tiktok_v2/utils.dart';
 
 class ChatsScreen extends StatefulWidget {
   const ChatsScreen({super.key});
@@ -44,9 +45,11 @@ class _ChatsScreenState extends State<ChatsScreen> {
   }
 
   void _onChatRoomTap() {
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => const ChatDetailScreen(),
-    ),);
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const ChatDetailScreen(),
+      ),
+    );
   }
 
   Widget _makeListTile({required int item, bool deleted = false}) {
@@ -67,8 +70,10 @@ class _ChatsScreenState extends State<ChatsScreen> {
           Text(
             "Nico ($item)",
             style: TextStyle(
-                fontWeight: FontWeight.w600,
-                color: deleted ? Colors.white : Colors.black,),
+              fontWeight: FontWeight.w600,
+              color:
+                  deleted || isDarkMode(context) ? Colors.white : Colors.black,
+            ),
           ),
           Text(
             "2:16 PM",
@@ -81,7 +86,9 @@ class _ChatsScreenState extends State<ChatsScreen> {
       ),
       subtitle: Text(
         "Don't forget to make video",
-        style: TextStyle(color: deleted ? Colors.white : Colors.black),
+        style: TextStyle(
+          color: deleted || isDarkMode(context) ? Colors.white : Colors.black,
+        ),
       ),
     );
   }

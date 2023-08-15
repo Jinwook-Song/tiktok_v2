@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_v2/constants/gaps.dart';
 import 'package:tiktok_v2/constants/sizes.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:tiktok_v2/utils.dart';
 
 const List tabs = [
   {
@@ -66,7 +67,7 @@ class _ActivityScreenState extends State<ActivityScreen>
 
   late final Animation<Color?> _barrierAnimation = ColorTween(
     begin: Colors.transparent,
-    end: Colors.black.withOpacity(0.7),
+    end: isDarkMode(context) ? Colors.white54 : Colors.black26,
   ).animate(_animationController);
 
   @override
@@ -125,9 +126,10 @@ class _ActivityScreenState extends State<ActivityScreen>
                 child: Text(
                   'New',
                   style: TextStyle(
-                      color: Colors.grey.shade500,
-                      fontSize: Sizes.size12,
-                      fontWeight: FontWeight.w600,),
+                    color: Colors.grey.shade500,
+                    fontSize: Sizes.size12,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
               if (!_dismissed)
@@ -141,10 +143,12 @@ class _ActivityScreenState extends State<ActivityScreen>
                     motion: const ScrollMotion(),
 
                     // A pane can dismiss the Slidable.
-                    dismissible: DismissiblePane(onDismissed: () {
-                      _dismissed = true;
-                      setState(() {});
-                    },),
+                    dismissible: DismissiblePane(
+                      onDismissed: () {
+                        _dismissed = true;
+                        setState(() {});
+                      },
+                    ),
 
                     // All actions are defined in the children parameter.
                     children: [
@@ -227,9 +231,10 @@ class _ActivityScreenState extends State<ActivityScreen>
                       width: Sizes.size48,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: Colors.white,
                         border: Border.all(
-                          color: Colors.grey.shade300,
+                          color: isDarkMode(context)
+                              ? Colors.grey.shade700
+                              : Colors.grey.shade300,
                         ),
                       ),
                       child: const Center(
@@ -239,8 +244,9 @@ class _ActivityScreenState extends State<ActivityScreen>
                     title: RichText(
                       text: TextSpan(
                         text: 'Account updates: ',
-                        style: const TextStyle(
-                          color: Colors.black,
+                        style: TextStyle(
+                          color:
+                              isDarkMode(context) ? Colors.white : Colors.black,
                           fontWeight: FontWeight.w600,
                           fontSize: Sizes.size14,
                         ),
@@ -278,9 +284,9 @@ class _ActivityScreenState extends State<ActivityScreen>
           SlideTransition(
             position: _pannelAnimation,
             child: Container(
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
+              decoration: BoxDecoration(
+                color: isDarkMode(context) ? Colors.black : Colors.white,
+                borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(
                     Sizes.size5,
                   ),
@@ -295,23 +301,26 @@ class _ActivityScreenState extends State<ActivityScreen>
                   for (var tab in tabs)
                     ListTile(
                       title: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              width: Sizes.size32,
-                              child: FaIcon(
-                                tab['icon'],
-                                size: Sizes.size16,
-                                color: Colors.black,
-                              ),
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            width: Sizes.size32,
+                            child: FaIcon(
+                              tab['icon'],
+                              size: Sizes.size16,
+                              color: isDarkMode(context)
+                                  ? Colors.white
+                                  : Colors.black,
                             ),
-                            Text(
-                              tab['title'],
-                              style: const TextStyle(
-                                fontWeight: FontWeight.w600,
-                              ),
+                          ),
+                          Text(
+                            tab['title'],
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w600,
                             ),
-                          ],),
+                          ),
+                        ],
+                      ),
                     ),
                 ],
               ),

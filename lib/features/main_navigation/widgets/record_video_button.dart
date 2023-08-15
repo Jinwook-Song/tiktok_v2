@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_v2/constants/sizes.dart';
+import 'package:tiktok_v2/utils.dart';
 
 class RecordVideoButton extends StatelessWidget {
   const RecordVideoButton({
@@ -22,8 +23,9 @@ class RecordVideoButton extends StatelessWidget {
             height: 28,
             padding: const EdgeInsets.symmetric(horizontal: Sizes.size8),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: const Color(0xff61D4F0),),
+              borderRadius: BorderRadius.circular(8),
+              color: const Color(0xff61D4F0),
+            ),
           ),
         ),
         Positioned(
@@ -33,21 +35,25 @@ class RecordVideoButton extends StatelessWidget {
             height: 28,
             padding: const EdgeInsets.symmetric(horizontal: Sizes.size8),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: Theme.of(context).primaryColor,),
+              borderRadius: BorderRadius.circular(8),
+              color: Theme.of(context).primaryColor,
+            ),
           ),
         ),
         Container(
           height: 28,
           padding: const EdgeInsets.symmetric(horizontal: Sizes.size10),
           decoration: BoxDecoration(
-            color: isHomeTab ? Colors.white : Colors.black,
+            color:
+                isHomeTab || isDarkMode(context) ? Colors.white : Colors.black,
             borderRadius: BorderRadius.circular(Sizes.size6),
           ),
           child: Center(
             child: Icon(
               FontAwesomeIcons.plus,
-              color: isHomeTab ? Colors.black : Colors.white,
+              color: isHomeTab || isDarkMode(context)
+                  ? Colors.black
+                  : Colors.white,
               size: 18,
             ),
           ),

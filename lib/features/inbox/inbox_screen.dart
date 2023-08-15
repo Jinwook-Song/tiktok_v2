@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_v2/constants/sizes.dart';
 import 'package:tiktok_v2/features/inbox/activity_screen.dart';
 import 'package:tiktok_v2/features/inbox/chats_screen.dart';
+import 'package:tiktok_v2/utils.dart';
 
 class InboxScreen extends StatelessWidget {
   const InboxScreen({super.key});
@@ -57,7 +58,9 @@ class InboxScreen extends StatelessWidget {
           ),
           Container(
             height: Sizes.size1,
-            color: Colors.grey.shade200,
+            color: isDarkMode(context)
+                ? Colors.grey.shade800
+                : Colors.grey.shade200,
           ),
           ListTile(
             leading: Container(
