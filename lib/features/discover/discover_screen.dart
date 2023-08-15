@@ -115,7 +115,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                   aspectRatio: 9 / 16,
                   child: Container(
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(Sizes.size4)),
+                        borderRadius: BorderRadius.circular(Sizes.size4),),
                     clipBehavior: Clip.hardEdge,
                     child: FadeInImage.assetNetwork(
                       fit: BoxFit.cover,
@@ -147,7 +147,7 @@ class _DiscoverScreenState extends State<DiscoverScreen>
                       const CircleAvatar(
                         radius: Sizes.size12,
                         backgroundImage: NetworkImage(
-                            'https://avatars.githubusercontent.com/u/78011042?v=4'),
+                            'https://avatars.githubusercontent.com/u/78011042?v=4',),
                       ),
                       Gaps.h6,
                       const Expanded(

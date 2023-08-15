@@ -42,7 +42,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                       ),
                       color: Colors.green,
                     ),
-                  ))
+                  ),)
             ],
           ),
           title: const Text(
@@ -146,7 +146,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                         ),
                       ),
                     ),
-                  )),
+                  ),),
                   Gaps.h20,
                   const SizedBox(
                     child: FaIcon(FontAwesomeIcons.paperPlane),

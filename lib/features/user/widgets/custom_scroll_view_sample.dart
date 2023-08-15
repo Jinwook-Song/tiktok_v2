@@ -79,7 +79,7 @@ class CustimScrollViewSample extends StatelessWidget {
 class CustomPersistentheader extends SliverPersistentHeaderDelegate {
   @override
   Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
+      BuildContext context, double shrinkOffset, bool overlapsContent,) {
     return Container(
       color: Colors.redAccent,
       child: const FractionallySizedBox(

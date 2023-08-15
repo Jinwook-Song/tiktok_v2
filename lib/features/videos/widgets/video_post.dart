@@ -28,7 +28,7 @@ class _VideoPostState extends State<VideoPost>
     with SingleTickerProviderStateMixin {
   late final VideoPlayerController _videoPlayerController =
       VideoPlayerController.asset(
-          'assets/videos/yeonjae_0${(widget.videoIndex % 6) + 1}.MP4');
+          'assets/videos/yeonjae_0${(widget.videoIndex % 6) + 1}.MP4',);
 
   late AnimationController _animationController;
 
@@ -45,7 +45,7 @@ class _VideoPostState extends State<VideoPost>
         value: 1.5, // default
         lowerBound: 1.0,
         upperBound: 1.5,
-        duration: _animationDuration);
+        duration: _animationDuration,);
   }
 
   @override
@@ -204,7 +204,7 @@ class _VideoPostState extends State<VideoPost>
                   backgroundColor: Colors.black,
                   foregroundColor: Colors.white,
                   foregroundImage: NetworkImage(
-                      'https://avatars.githubusercontent.com/u/78011042?v=4'),
+                      'https://avatars.githubusercontent.com/u/78011042?v=4',),
                   child: Text('JW'),
                 ),
                 Gaps.v20,

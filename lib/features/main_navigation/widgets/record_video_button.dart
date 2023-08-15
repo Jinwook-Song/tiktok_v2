@@ -23,7 +23,7 @@ class RecordVideoButton extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: Sizes.size8),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
-                color: const Color(0xff61D4F0)),
+                color: const Color(0xff61D4F0),),
           ),
         ),
         Positioned(
@@ -34,7 +34,7 @@ class RecordVideoButton extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: Sizes.size8),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
-                color: Theme.of(context).primaryColor),
+                color: Theme.of(context).primaryColor,),
           ),
         ),
         Container(

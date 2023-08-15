@@ -127,7 +127,7 @@ class _ActivityScreenState extends State<ActivityScreen>
                   style: TextStyle(
                       color: Colors.grey.shade500,
                       fontSize: Sizes.size12,
-                      fontWeight: FontWeight.w600),
+                      fontWeight: FontWeight.w600,),
                 ),
               ),
               if (!_dismissed)
@@ -144,7 +144,7 @@ class _ActivityScreenState extends State<ActivityScreen>
                     dismissible: DismissiblePane(onDismissed: () {
                       _dismissed = true;
                       setState(() {});
-                    }),
+                    },),
 
                     // All actions are defined in the children parameter.
                     children: [
@@ -311,7 +311,7 @@ class _ActivityScreenState extends State<ActivityScreen>
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
-                          ]),
+                          ],),
                     ),
                 ],
               ),

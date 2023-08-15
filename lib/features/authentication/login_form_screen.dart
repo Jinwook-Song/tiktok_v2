@@ -84,7 +84,7 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
                     ),
                   )
                 ],
-              )),
+              ),),
         ),
       ),
     );

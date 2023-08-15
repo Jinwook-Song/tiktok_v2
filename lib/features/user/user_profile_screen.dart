@@ -16,7 +16,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
   void _onSettingsTap() {
     Navigator.of(context).push(MaterialPageRoute(
       builder: (context) => const SettingsScreen(),
-    ));
+    ),);
   }
 
   @override
@@ -155,13 +155,13 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
                               color: Theme.of(context).primaryColor,
-                              borderRadius: BorderRadius.circular(2)),
+                              borderRadius: BorderRadius.circular(2),),
                           child: const Text(
                             'Follow',
                             style: TextStyle(
                                 fontSize: Sizes.size16,
                                 color: Colors.white,
-                                fontWeight: FontWeight.w600),
+                                fontWeight: FontWeight.w600,),
                           ),
                         ),
                         Gaps.h4,
@@ -293,7 +293,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                               ),
                             )
                           ],
-                        ))
+                        ),)
                   ],
                 ),
               ),

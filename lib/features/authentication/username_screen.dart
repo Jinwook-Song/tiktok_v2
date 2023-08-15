@@ -38,7 +38,7 @@ class _UsernameScreenState extends State<UsernameScreen> {
     if (_username.isEmpty) return;
     Navigator.of(context).push(MaterialPageRoute(
       builder: (context) => const EmailScreen(),
-    ));
+    ),);
   }
 
   @override

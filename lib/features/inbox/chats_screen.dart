@@ -46,7 +46,7 @@ class _ChatsScreenState extends State<ChatsScreen> {
   void _onChatRoomTap() {
     Navigator.of(context).push(MaterialPageRoute(
       builder: (context) => const ChatDetailScreen(),
-    ));
+    ),);
   }
 
   Widget _makeListTile({required int item, bool deleted = false}) {
@@ -68,7 +68,7 @@ class _ChatsScreenState extends State<ChatsScreen> {
             "Nico ($item)",
             style: TextStyle(
                 fontWeight: FontWeight.w600,
-                color: deleted ? Colors.white : Colors.black),
+                color: deleted ? Colors.white : Colors.black,),
           ),
           Text(
             "2:16 PM",

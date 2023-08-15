@@ -36,7 +36,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
         ),
       ),
       fullscreenDialog: true,
-    ));
+    ),);
   }
 
   @override
@@ -115,7 +115,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 onTap: () => _onBottomNavigationTap(4),
               ),
             ],
-          )),
+          ),),
     );
   }
 }

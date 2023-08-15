@@ -112,7 +112,7 @@ class _VideoCommentsState extends State<VideoComments> {
                                   overflow: TextOverflow.ellipsis,
                                 ),
                               ],
-                            )),
+                            ),),
                             Gaps.h10,
                             Column(
                               children: [
@@ -132,7 +132,7 @@ class _VideoCommentsState extends State<VideoComments> {
                               ],
                             )
                           ],
-                        )),
+                        ),),
               ),
               Positioned(
                 bottom: 0,
@@ -163,7 +163,7 @@ class _VideoCommentsState extends State<VideoComments> {
                                     borderRadius: BorderRadius.circular(
                                       Sizes.size12,
                                     ),
-                                    borderSide: BorderSide.none),
+                                    borderSide: BorderSide.none,),
                                 filled: true,
                                 fillColor: Colors.grey.shade200,
                                 contentPadding: const EdgeInsets.symmetric(
@@ -202,7 +202,7 @@ class _VideoCommentsState extends State<VideoComments> {
                                       ),
                                     ],
                                   ),
-                                )),
+                                ),),
                           ),
                         ),
                       )

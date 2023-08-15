@@ -45,7 +45,7 @@ class _InterestsButtonState extends State<InterestsButton> {
                 blurRadius: 5,
                 spreadRadius: 5,
               ),
-            ]),
+            ],),
         child: Text(
           widget.interest,
           style: TextStyle(
@@ -54,7 +54,7 @@ class _InterestsButtonState extends State<InterestsButton> {
                   : isDarkMode(context)
                       ? Colors.grey.shade200
                       : Colors.black,
-              fontWeight: FontWeight.w600),
+              fontWeight: FontWeight.w600,),
         ),
       ),
     );

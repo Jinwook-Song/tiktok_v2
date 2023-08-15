@@ -110,7 +110,7 @@ class _TutorialScreenState extends State<TutorialScreen> {
                   crossFadeState: _page == Page.first
                       ? CrossFadeState.showFirst
                       : CrossFadeState.showSecond,
-                  duration: const Duration(milliseconds: 300))),
+                  duration: const Duration(milliseconds: 300),),),
         ),
         bottomNavigationBar: BottomAppBar(
           color: isDarkMode(context) ? Colors.black : Colors.white,
