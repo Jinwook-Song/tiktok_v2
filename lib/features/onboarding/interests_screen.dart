@@ -84,20 +84,22 @@ class _InterestsScreenState extends State<InterestsScreen> {
   }
 
   void _onNextTap() {
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => const TutorialScreen(),
-    ),);
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const TutorialScreen(),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        surfaceTintColor: Colors.white,
         title: AnimatedOpacity(
-            opacity: _showHeader ? 1 : 0,
-            duration: const Duration(milliseconds: 150),
-            child: const Text('Choose your interests'),),
+          opacity: _showHeader ? 1 : 0,
+          duration: const Duration(milliseconds: 150),
+          child: const Text('Choose your interests'),
+        ),
       ),
       body: Scrollbar(
         controller: _scrollController,

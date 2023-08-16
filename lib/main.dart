@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tiktok_v2/constants/sizes.dart';
-import 'package:tiktok_v2/features/main_navigation/main_navigation_screen.dart';
+import 'package:tiktok_v2/features/settings/settings_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,6 +27,15 @@ class TikTokApp extends StatelessWidget {
     return MaterialApp(
       title: 'TikTok',
       debugShowCheckedModeBanner: false,
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate
+      ],
+      supportedLocales: const [
+        Locale('en'),
+        Locale('ko'),
+      ],
       themeMode: ThemeMode.system,
       theme: ThemeData(
         useMaterial3: true,
@@ -110,7 +120,7 @@ class TikTokApp extends StatelessWidget {
         ),
         splashColor: Colors.transparent,
       ),
-      home: const MainNavigationScreen(),
+      home: const SettingsScreen(),
     );
   }
 }

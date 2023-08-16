@@ -63,7 +63,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 },
               );
               if (kDebugMode) print(date);
-              // ignore: use_build_context_synchronously
+              if (!mounted) return;
               final time = await showTimePicker(
                 context: context,
                 initialTime: TimeOfDay.now(),
@@ -79,7 +79,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 },
               );
               if (kDebugMode) print(time);
-              // ignore: use_build_context_synchronously
+              if (!mounted) return;
               final booking = await showDateRangePicker(
                 context: context,
                 firstDate: DateTime.now(),
