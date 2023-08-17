@@ -5,6 +5,7 @@ import 'package:tiktok_v2/constants/sizes.dart';
 import 'package:tiktok_v2/features/authentication/username_screen.dart';
 import 'package:tiktok_v2/features/authentication/login_screen.dart';
 import 'package:tiktok_v2/features/authentication/widgets/auth_button.dart';
+import 'package:flutter_gen/gen_l10n/intl_generated.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -39,7 +40,7 @@ class SignUpScreen extends StatelessWidget {
                 children: [
                   Gaps.v80,
                   Text(
-                    'Sign up for TikTok',
+                    AppLocalizations.of(context)!.signUpTitle('TikTok'),
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   Gaps.v20,
