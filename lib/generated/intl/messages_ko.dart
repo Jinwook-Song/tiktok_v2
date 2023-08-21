@@ -25,7 +25,15 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m1(appName) => "${appName}에 가입하세요";
 
+  static String m2(count) => "${count}";
+
+  static String m3(count) => "${count}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
-  static Map<String, Function> _notInlinedMessages(_) =>
-      <String, Function>{"signUpSubtitle": m0, "signUpTitle": m1};
+  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "signUpSubtitle": m0,
+        "signUpTitle": m1,
+        "videoCommentCounts": m2,
+        "videoLikeCounts": m3
+      };
 }

@@ -1,4 +1,22 @@
 {
   "signUpTitle": "{appName}에 가입하세요",
-  "signUpSubtitle": "Create a profile, follow other accounts, make your own {videoCount, plural, =0{no videos} =1{video} other{videos}}, and more."
+  "signUpSubtitle": "Create a profile, follow other accounts, make your own {videoCount, plural, =0{no videos} =1{video} other{videos}}, and more.",
+  "videoLikeCounts": "{count}",
+  "@videoLikeCounts": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "compact"
+      }
+    }
+  },
+  "videoCommentCounts": "{count}",
+  "@videoCommentCounts": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "compact"
+      }
+    }
+  }
 }

@@ -69,6 +69,36 @@ class S {
       args: [videoCount],
     );
   }
+
+  /// `{count}`
+  String videoLikeCounts(int count) {
+    final NumberFormat countNumberFormat = NumberFormat.compact(
+      locale: Intl.getCurrentLocale(),
+    );
+    final String countString = countNumberFormat.format(count);
+
+    return Intl.message(
+      '$countString',
+      name: 'videoLikeCounts',
+      desc: '',
+      args: [countString],
+    );
+  }
+
+  /// `{count}`
+  String videoCommentCounts(int count) {
+    final NumberFormat countNumberFormat = NumberFormat.compact(
+      locale: Intl.getCurrentLocale(),
+    );
+    final String countString = countNumberFormat.format(count);
+
+    return Intl.message(
+      '$countString',
+      name: 'videoCommentCounts',
+      desc: '',
+      args: [countString],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

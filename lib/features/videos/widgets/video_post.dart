@@ -5,6 +5,7 @@ import 'package:tiktok_v2/constants/gaps.dart';
 import 'package:tiktok_v2/constants/sizes.dart';
 import 'package:tiktok_v2/features/videos/widgets/video_button.dart';
 import 'package:tiktok_v2/features/videos/widgets/video_comments.dart';
+import 'package:tiktok_v2/generated/l10n.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
@@ -28,7 +29,8 @@ class _VideoPostState extends State<VideoPost>
     with SingleTickerProviderStateMixin {
   late final VideoPlayerController _videoPlayerController =
       VideoPlayerController.asset(
-          'assets/videos/yeonjae_0${(widget.videoIndex % 6) + 1}.MP4',);
+    'assets/videos/yeonjae_0${(widget.videoIndex % 6) + 1}.MP4',
+  );
 
   late AnimationController _animationController;
 
@@ -41,11 +43,12 @@ class _VideoPostState extends State<VideoPost>
     super.initState();
     _initVideoPlayer();
     _animationController = AnimationController(
-        vsync: this,
-        value: 1.5, // default
-        lowerBound: 1.0,
-        upperBound: 1.5,
-        duration: _animationDuration,);
+      vsync: this,
+      value: 1.5, // default
+      lowerBound: 1.0,
+      upperBound: 1.5,
+      duration: _animationDuration,
+    );
   }
 
   @override
@@ -204,7 +207,8 @@ class _VideoPostState extends State<VideoPost>
                   backgroundColor: Colors.black,
                   foregroundColor: Colors.white,
                   foregroundImage: NetworkImage(
-                      'https://avatars.githubusercontent.com/u/78011042?v=4',),
+                    'https://avatars.githubusercontent.com/u/78011042?v=4',
+                  ),
                   child: Text('JW'),
                 ),
                 Gaps.v20,
@@ -223,16 +227,16 @@ class _VideoPostState extends State<VideoPost>
                         ),
                 ),
                 Gaps.v20,
-                const VideoButton(
+                VideoButton(
                   icon: FontAwesomeIcons.solidHeart,
-                  text: '2.9M',
+                  text: S.of(context).videoLikeCounts(9999),
                 ),
                 Gaps.v20,
                 GestureDetector(
                   onTap: () => _onCommentTap(context),
-                  child: const VideoButton(
+                  child: VideoButton(
                     icon: FontAwesomeIcons.solidComment,
-                    text: '33.0K',
+                    text: S.of(context).videoCommentCounts(1231231),
                   ),
                 ),
                 Gaps.v20,

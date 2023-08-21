@@ -17,8 +17,8 @@ class MainNavigationScreen extends StatefulWidget {
 }
 
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
-  int _currentIndex = 1;
-  bool _isHomeTab = false;
+  int _currentIndex = 0;
+  late bool _isHomeTab = _currentIndex == 0 ? true : false;
 
   void _onBottomNavigationTap(int tab) {
     _currentIndex = tab;
