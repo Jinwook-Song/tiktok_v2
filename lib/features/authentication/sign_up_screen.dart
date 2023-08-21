@@ -45,7 +45,7 @@ class SignUpScreen extends StatelessWidget {
                   ),
                   Gaps.v20,
                   Text(
-                    'Create a profile, follow other accounts, make your own videos, and more.',
+                    S.of(context).signUpSubtitle(2),
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.titleMedium!.copyWith(
                           color: Colors.grey.shade500,
