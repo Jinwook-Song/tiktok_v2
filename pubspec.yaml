@@ -44,6 +44,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl: any
+  go_router: ^10.1.0
 
 dev_dependencies:
   flutter_test:
