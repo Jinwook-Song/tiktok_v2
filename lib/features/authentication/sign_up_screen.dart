@@ -11,11 +11,11 @@ class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
 
   void _onLoginTap(BuildContext context) {
-    context.push(Routes.loginScreen);
+    context.pushNamed(Routes.loginScreen[ScreenDef.name]!);
   }
 
   void _onEmailTap(BuildContext context) {
-    context.push(Routes.userNameScreen);
+    context.pushNamed(Routes.userNameScreen[ScreenDef.name]!);
 
     // Navigator.of(context).pushNamed(Routes.userNameScreen);
 

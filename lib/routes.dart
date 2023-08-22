@@ -6,25 +6,42 @@ import 'package:tiktok_v2/features/authentication/sign_up_screen.dart';
 import 'package:tiktok_v2/features/authentication/username_screen.dart';
 import 'package:tiktok_v2/features/user/user_profile_screen.dart';
 
+enum ScreenDef { name, path }
+
 class Routes {
-  static const signupScreen = '/';
-  static const loginScreen = '/login';
-  static const userNameScreen = '/username';
-  static const emailScreen = '/email';
+  static const signupScreen = {
+    ScreenDef.name: 'Sign Up',
+    ScreenDef.path: '/',
+  };
+  static const loginScreen = {
+    ScreenDef.name: 'Log In',
+    ScreenDef.path: '/login',
+  };
+  static const userNameScreen = {
+    ScreenDef.name: 'Username',
+    ScreenDef.path: '/username',
+  };
+  static const emailScreen = {
+    ScreenDef.name: 'Email',
+    ScreenDef.path: '/email',
+  };
 }
 
 final router = GoRouter(
   routes: [
     GoRoute(
-      path: Routes.signupScreen,
+      name: Routes.signupScreen[ScreenDef.name],
+      path: Routes.signupScreen[ScreenDef.path]!,
       builder: (context, state) => const SignUpScreen(),
     ),
     GoRoute(
-      path: Routes.loginScreen,
+      name: Routes.loginScreen[ScreenDef.name],
+      path: Routes.loginScreen[ScreenDef.path]!,
       builder: (context, state) => const LoginScreen(),
     ),
     GoRoute(
-      path: Routes.userNameScreen,
+      name: Routes.userNameScreen[ScreenDef.name],
+      path: Routes.userNameScreen[ScreenDef.path]!,
       pageBuilder: (context, state) {
         return CustomTransitionPage(
           child: const UsernameScreen(),
@@ -41,7 +58,8 @@ final router = GoRouter(
       // builder: (context, state) => const UsernameScreen(),
     ),
     GoRoute(
-      path: Routes.emailScreen,
+      name: Routes.emailScreen[ScreenDef.name],
+      path: Routes.emailScreen[ScreenDef.path]!,
       builder: (context, state) {
         final args = state.extra as EmailScreenArgs;
         return EmailScreen(username: args.username);

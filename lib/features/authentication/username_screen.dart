@@ -38,8 +38,8 @@ class _UsernameScreenState extends State<UsernameScreen> {
 
   void _onNextTap() {
     if (_username.isEmpty) return;
-    context.push(
-      Routes.emailScreen,
+    context.pushNamed(
+      Routes.emailScreen[ScreenDef.name]!,
       extra: EmailScreenArgs(
         username: _username,
       ),
