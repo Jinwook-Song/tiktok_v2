@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tiktok_v2/constants/sizes.dart';
+import 'package:tiktok_v2/features/authentication/login_screen.dart';
 import 'package:tiktok_v2/features/authentication/sign_up_screen.dart';
+import 'package:tiktok_v2/features/authentication/username_screen.dart';
 import 'package:tiktok_v2/generated/l10n.dart';
+import 'package:tiktok_v2/routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -123,7 +126,12 @@ class TikTokApp extends StatelessWidget {
         ),
         splashColor: Colors.transparent,
       ),
-      home: const SignUpScreen(),
+      initialRoute: Routes.signupScreen,
+      routes: {
+        Routes.signupScreen: (context) => const SignUpScreen(),
+        Routes.loginScreen: (context) => const LoginScreen(),
+        Routes.userNameScreen: (context) => const UsernameScreen(),
+      },
     );
   }
 }
