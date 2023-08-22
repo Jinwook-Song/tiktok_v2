@@ -34,8 +34,10 @@ final router = GoRouter(
       path: '/users/:username',
       builder: (context, state) {
         final username = state.pathParameters['username'];
+        final tab = state.uri.queryParameters['show'];
         return UserProfileScreen(
           username: username,
+          tab: tab,
         );
       },
     ),

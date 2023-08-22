@@ -7,10 +7,12 @@ import 'package:tiktok_v2/features/user/widgets/persistent_tab_bar.dart';
 import 'package:tiktok_v2/utils.dart';
 
 class UserProfileScreen extends StatefulWidget {
+  final String? tab;
   final String? username;
   const UserProfileScreen({
     super.key,
     this.username,
+    this.tab,
   });
 
   @override
@@ -32,6 +34,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
       backgroundColor: isDarkMode(context) ? Colors.grey.shade900 : null,
       body: SafeArea(
         child: DefaultTabController(
+          initialIndex: widget.tab == 'likes' ? 1 : 0,
           length: 2,
           child: NestedScrollView(
             headerSliverBuilder: (context, innerBoxIsScrolled) {
