@@ -1,5 +1,16 @@
 {
-  "signUpTitle": "Sign up for {appName}",
+  "signUpTitle": "Sign up for {appName}, {when}",
+  "@signUpTitle": {
+    "placeholders": {
+      "appName": {
+        "type": "String"
+      },
+      "when": {
+        "type": "DateTime",
+        "format": "MMMMd"
+      }
+    }
+  },
   "signUpSubtitle": "Create a profile, follow other accounts, make your own {videoCount, plural, =0{no videos} =1{video} other{videos}}, and more.",
   "videoLikeCounts": "{count}",
   "@videoLikeCounts": {
