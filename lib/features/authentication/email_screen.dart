@@ -4,8 +4,16 @@ import 'package:tiktok_v2/constants/sizes.dart';
 import 'package:tiktok_v2/features/authentication/password_screen.dart';
 import 'package:tiktok_v2/features/authentication/widgets/form_button.dart';
 
+class EmailScreenArgs {
+  final String username;
+
+  EmailScreenArgs({required this.username});
+}
+
 class EmailScreen extends StatefulWidget {
-  const EmailScreen({super.key});
+  const EmailScreen({
+    super.key,
+  });
 
   @override
   State<EmailScreen> createState() => _EmailScreenState();
@@ -37,7 +45,8 @@ class _EmailScreenState extends State<EmailScreen> {
   String? _isEmailValid() {
     if (_email.isEmpty) return null;
     final regExp = RegExp(
-        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",);
+      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
+    );
 
     if (!regExp.hasMatch(_email)) {
       return 'Please enter a valid email';
@@ -52,13 +61,17 @@ class _EmailScreenState extends State<EmailScreen> {
 
   void _onSubmit() {
     if (_email.isEmpty || _isEmailValid() != null) return;
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => const PasswordScreen(),
-    ),);
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const PasswordScreen(),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)!.settings.arguments as EmailScreenArgs;
+
     return GestureDetector(
       onTap: _onScaffoldTap,
       child: Scaffold(
@@ -68,9 +81,9 @@ class _EmailScreenState extends State<EmailScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'What is your email?',
-                style: TextStyle(
+              Text(
+                'What is your email, ${args.username} ?',
+                style: const TextStyle(
                   fontSize: Sizes.size20,
                   fontWeight: FontWeight.w600,
                 ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tiktok_v2/constants/sizes.dart';
+import 'package:tiktok_v2/features/authentication/email_screen.dart';
 import 'package:tiktok_v2/features/authentication/login_screen.dart';
 import 'package:tiktok_v2/features/authentication/sign_up_screen.dart';
 import 'package:tiktok_v2/features/authentication/username_screen.dart';
@@ -131,6 +132,7 @@ class TikTokApp extends StatelessWidget {
         Routes.signupScreen: (context) => const SignUpScreen(),
         Routes.loginScreen: (context) => const LoginScreen(),
         Routes.userNameScreen: (context) => const UsernameScreen(),
+        Routes.emailScreen: (context) => const EmailScreen(),
       },
     );
   }
