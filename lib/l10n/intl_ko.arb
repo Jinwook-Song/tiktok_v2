@@ -18,5 +18,14 @@
         "format": "compact"
       }
     }
+  },
+  "videoCommentsTitle": "{count, plural, =1{{count} comment} other{{count} comments}}",
+  "@videoCommentsTitle": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "compact"
+      }
+    }
   }
 }

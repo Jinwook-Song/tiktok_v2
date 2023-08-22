@@ -27,13 +27,17 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m2(count) => "${count}";
 
-  static String m3(count) => "${count}";
+  static String m3(count) =>
+      "${Intl.plural(count, one: '${count} comment', other: '${count} comments')}";
+
+  static String m4(count) => "${count}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "signUpSubtitle": m0,
         "signUpTitle": m1,
         "videoCommentCounts": m2,
-        "videoLikeCounts": m3
+        "videoCommentsTitle": m3,
+        "videoLikeCounts": m4
       };
 }

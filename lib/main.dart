@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tiktok_v2/constants/sizes.dart';
 import 'package:tiktok_v2/features/main_navigation/main_navigation_screen.dart';
 import 'package:tiktok_v2/generated/l10n.dart';
@@ -28,7 +29,12 @@ class TikTokApp extends StatelessWidget {
     return MaterialApp(
       title: 'TikTok',
       debugShowCheckedModeBanner: false,
-      localizationsDelegates: const [S.delegate],
+      localizationsDelegates: const [
+        S.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+      ],
       supportedLocales: const [
         Locale('en'),
         Locale('ko'),

@@ -99,6 +99,18 @@ class S {
       args: [countString],
     );
   }
+
+  /// `{count, plural, =1{{count} comment} other{{count} comments}}`
+  String videoCommentsTitle(int count) {
+    return Intl.plural(
+      count,
+      one: '$count comment',
+      other: '$count comments',
+      name: 'videoCommentsTitle',
+      desc: '',
+      args: [count],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
