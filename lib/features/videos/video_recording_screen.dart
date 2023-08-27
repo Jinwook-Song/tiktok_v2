@@ -1,6 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:tiktok_v2/constants/sizes.dart';
 
 class VideoRecordingScreen extends StatefulWidget {
   const VideoRecordingScreen({super.key});
@@ -11,7 +12,8 @@ class VideoRecordingScreen extends StatefulWidget {
 
 class _VideoRecordingScreenState extends State<VideoRecordingScreen> {
   bool _hasPermission = false;
-  late final CameraController _cameraController;
+  bool _isSelfieMode = false;
+  late CameraController _cameraController;
 
   @override
   void initState() {
@@ -29,7 +31,7 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen> {
     final cameras = await availableCameras();
     if (cameras.isEmpty) return;
     _cameraController = CameraController(
-      cameras[0],
+      cameras[_isSelfieMode ? 1 : 0],
       ResolutionPreset.max,
     );
     await _cameraController.initialize();
@@ -51,20 +53,38 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen> {
     }
   }
 
+  Future<void> _toggleCameraDirection() async {
+    _isSelfieMode = !_isSelfieMode;
+    await _initCamera();
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
       body: _hasPermission && _cameraController.value.isInitialized
-          ? Stack(
-              alignment: Alignment.center,
-              children: [
-                Positioned.fill(
-                  child: CameraPreview(
-                    _cameraController,
+          ? SafeArea(
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Positioned.fill(
+                    child: CameraPreview(
+                      _cameraController,
+                    ),
                   ),
-                ),
-              ],
+                  Positioned(
+                    top: Sizes.size16,
+                    left: Sizes.size16,
+                    child: IconButton(
+                      onPressed: _toggleCameraDirection,
+                      icon: const Icon(
+                        Icons.cameraswitch,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             )
           : const Center(
               child: CircularProgressIndicator.adaptive(),
