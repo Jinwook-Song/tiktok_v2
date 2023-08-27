@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tiktok_v2/features/authentication/email_screen.dart';
 import 'package:tiktok_v2/features/authentication/login_screen.dart';
-import 'package:tiktok_v2/features/authentication/sign_up_screen.dart';
 import 'package:tiktok_v2/features/authentication/username_screen.dart';
 import 'package:tiktok_v2/features/user/user_profile_screen.dart';
+import 'package:tiktok_v2/features/videos/video_recording_screen.dart';
 
 enum ScreenDef { name, path }
 
@@ -25,6 +25,10 @@ class Routes {
     ScreenDef.name: 'Email',
     ScreenDef.path: '/email',
   };
+  static const videoRecordingScreen = {
+    ScreenDef.name: 'Viedo Recording',
+    ScreenDef.path: '/video-recording',
+  };
 }
 
 final router = GoRouter(
@@ -32,7 +36,7 @@ final router = GoRouter(
     GoRoute(
       name: Routes.signupScreen[ScreenDef.name],
       path: Routes.signupScreen[ScreenDef.path]!,
-      builder: (context, state) => const SignUpScreen(),
+      builder: (context, state) => const VideoRecordingScreen(),
     ),
     GoRoute(
       name: Routes.loginScreen[ScreenDef.name],

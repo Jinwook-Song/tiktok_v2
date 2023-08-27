@@ -45,6 +45,8 @@ dependencies:
     sdk: flutter
   intl: any
   go_router: ^10.1.0
+  camera: ^0.10.5+3
+  permission_handler: ^10.4.3
 
 dev_dependencies:
   flutter_test:
