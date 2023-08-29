@@ -127,7 +127,7 @@ class TikTokApp extends StatelessWidget {
       ),
     );
   }
-}
+} 
 
 /* Layout builder는 해당 위젯이 가질 수 있는 최대 크기를 알 있다.
 class LayoutBuilderCodeLab extends StatelessWidget {
