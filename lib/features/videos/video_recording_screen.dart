@@ -10,21 +10,57 @@ class VideoRecordingScreen extends StatefulWidget {
   State<VideoRecordingScreen> createState() => _VideoRecordingScreenState();
 }
 
-class _VideoRecordingScreenState extends State<VideoRecordingScreen> {
+class _VideoRecordingScreenState extends State<VideoRecordingScreen>
+    with TickerProviderStateMixin {
   bool _hasPermission = false;
   bool _isSelfieMode = false;
   late CameraController _cameraController;
   late FlashMode _flashMode;
+  late final AnimationController _buttonAnimationController =
+      AnimationController(
+    vsync: this,
+    duration: const Duration(
+      milliseconds: 150,
+    ),
+  );
+  late final AnimationController _progressAnimationController =
+      AnimationController(
+    vsync: this,
+    duration: const Duration(
+      seconds: 10,
+    ),
+    lowerBound: 0.0,
+    upperBound: 1.0,
+  );
+
+  late final Animation<double> _buttonAnimation = Tween(
+    begin: 1.0,
+    end: 0.9,
+  ).animate(
+    _buttonAnimationController,
+  );
 
   @override
   void initState() {
     super.initState();
     _initPermissions();
+    _progressAnimationController.addListener(() {
+      setState(() {});
+    });
+
+    // 영상 녹화시간 10초 제한
+    _progressAnimationController.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        _stopRecording();
+      }
+    });
   }
 
   @override
   void dispose() {
     _cameraController.dispose();
+    _buttonAnimationController.dispose();
+    _progressAnimationController.dispose();
     super.dispose();
   }
 
@@ -66,6 +102,16 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen> {
     await _cameraController.setFlashMode(flashMode);
     _flashMode = flashMode;
     setState(() {});
+  }
+
+  void _startRecording(TapDownDetails details) {
+    _buttonAnimationController.forward();
+    _progressAnimationController.forward();
+  }
+
+  void _stopRecording([TapUpDetails? details]) {
+    _buttonAnimationController.reverse();
+    _progressAnimationController.reset();
   }
 
   @override
@@ -132,6 +178,37 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen> {
                       ],
                     ),
                   ),
+                  Positioned(
+                    bottom: Sizes.size40,
+                    child: GestureDetector(
+                      onTapDown: _startRecording,
+                      onTapUp: _stopRecording,
+                      child: ScaleTransition(
+                        scale: _buttonAnimation,
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            SizedBox(
+                              width: Sizes.size60 + Sizes.size10,
+                              height: Sizes.size60 + Sizes.size10,
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                                value: _progressAnimationController.value,
+                              ),
+                            ),
+                            Container(
+                              width: Sizes.size60,
+                              height: Sizes.size60,
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.red,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  )
                 ],
               ),
             )
