@@ -40,13 +40,14 @@ dependencies:
   video_player: ^2.7.0
   visibility_detector: ^0.4.0+2
   flutter_slidable: ^3.0.0
-  google_fonts: ^5.1.0
+  google_fonts: 4.0.4
   flutter_localizations:
     sdk: flutter
   intl: any
   go_router: ^10.1.0
   camera: ^0.10.5+3
   permission_handler: ^10.4.3
+  gallery_saver: ^2.3.2
 
 dev_dependencies:
   flutter_test:
