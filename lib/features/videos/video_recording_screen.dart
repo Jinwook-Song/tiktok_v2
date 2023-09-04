@@ -14,9 +14,10 @@ class VideoRecordingScreen extends StatefulWidget {
 }
 
 class _VideoRecordingScreenState extends State<VideoRecordingScreen>
-    with TickerProviderStateMixin {
+    with TickerProviderStateMixin, WidgetsBindingObserver {
   bool _hasPermission = false;
   bool _isSelfieMode = false;
+  bool _appActivated = true;
   late CameraController _cameraController;
   late FlashMode _flashMode;
   late final AnimationController _buttonAnimationController =
@@ -46,6 +47,7 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     _initPermissions();
     _progressAnimationController.addListener(() {
       setState(() {});
@@ -60,8 +62,31 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
   }
 
   @override
+  Future<void> didChangeAppLifecycleState(AppLifecycleState state) async {
+    if (!_cameraController.value.isInitialized) return;
+
+    switch (state) {
+      case AppLifecycleState.resumed:
+        _appActivated = true;
+        await _initPermissions();
+        break;
+      case AppLifecycleState.paused:
+      case AppLifecycleState.inactive:
+      case AppLifecycleState.detached:
+        _appActivated = false;
+        setState(() {});
+        // 위젯 트리에서 CameraPreview를 제거 후, dispose 해야한다.
+        // setState와의 순서 중요
+        _cameraController.dispose();
+        break;
+    }
+  }
+
+  @override
   void dispose() {
-    _cameraController.dispose();
+    if (_cameraController.value.isInitialized) {
+      _cameraController.dispose();
+    }
     _buttonAnimationController.dispose();
     _progressAnimationController.dispose();
     super.dispose();
@@ -158,7 +183,9 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: _hasPermission && _cameraController.value.isInitialized
+      body: _hasPermission &&
+              _cameraController.value.isInitialized &&
+              _appActivated
           ? SafeArea(
               child: Stack(
                 alignment: Alignment.center,
