@@ -8,9 +8,11 @@ import 'package:gallery_saver/gallery_saver.dart';
 
 class VideoPreviewScreen extends StatefulWidget {
   final XFile video;
+  final bool fromGallery;
   const VideoPreviewScreen({
     super.key,
     required this.video,
+    required this.fromGallery,
   });
 
   @override
@@ -44,12 +46,10 @@ class _VideoPreviewScreenState extends State<VideoPreviewScreen> {
   Future<void> _saveToGallery() async {
     if (_saved) return;
 
-    final ok = await GallerySaver.saveVideo(
+    await GallerySaver.saveVideo(
       widget.video.path,
       albumName: 'TikTok',
     );
-
-    print(ok);
 
     _saved = true;
     setState(() {});
@@ -61,14 +61,15 @@ class _VideoPreviewScreenState extends State<VideoPreviewScreen> {
       appBar: AppBar(
         title: const Text('Preview'),
         actions: [
-          IconButton(
-            onPressed: _saveToGallery,
-            icon: Icon(
-              _saved
-                  ? FontAwesomeIcons.fileCircleCheck
-                  : FontAwesomeIcons.download,
-            ),
-          )
+          if (!widget.fromGallery)
+            IconButton(
+              onPressed: _saveToGallery,
+              icon: Icon(
+                _saved
+                    ? FontAwesomeIcons.fileCircleCheck
+                    : FontAwesomeIcons.download,
+              ),
+            )
         ],
       ),
       body: _videoPlayerController.value.isInitialized
