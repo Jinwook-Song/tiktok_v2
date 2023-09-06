@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tiktok_v2/constants/gaps.dart';
 import 'package:tiktok_v2/constants/sizes.dart';
+import 'package:tiktok_v2/features/authentication/username_screen.dart';
 import 'package:tiktok_v2/features/authentication/widgets/auth_button.dart';
 import 'package:tiktok_v2/generated/l10n.dart';
 import 'package:tiktok_v2/routes.dart';
@@ -15,7 +16,12 @@ class SignUpScreen extends StatelessWidget {
   }
 
   void _onEmailTap(BuildContext context) {
-    context.pushNamed(Routes.userNameScreen[ScreenDef.name]!);
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const UsernameScreen(),
+      ),
+    );
 
     // Navigator.of(context).pushNamed(Routes.userNameScreen);
 

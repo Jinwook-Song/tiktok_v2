@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tiktok_v2/constants/gaps.dart';
 import 'package:tiktok_v2/constants/sizes.dart';
-import 'package:tiktok_v2/features/main_navigation/main_navigation_screen.dart';
+import 'package:tiktok_v2/common/widgets/main_navigation/main_navigation_screen.dart';
 import 'package:tiktok_v2/utils.dart';
 
 enum Direction { left, right }
@@ -56,61 +56,61 @@ class _TutorialScreenState extends State<TutorialScreen> {
         body: Padding(
           padding: const EdgeInsets.all(Sizes.size28),
           child: SafeArea(
-              child: AnimatedCrossFade(
-                  firstChild: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: Sizes.size24),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Gaps.v40,
-                        const Text(
-                          'First View',
-                          style: TextStyle(
-                            fontSize: Sizes.size40,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        Gaps.v20,
-                        Text(
-                          'Videos are personalized for you based on what you watch, like, and share.',
-                          style: TextStyle(
-                            fontSize: Sizes.size16,
-                            color: Colors.grey.shade500,
-                          ),
-                        ),
-                      ],
+            child: AnimatedCrossFade(
+              firstChild: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: Sizes.size24),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Gaps.v40,
+                    const Text(
+                      'First View',
+                      style: TextStyle(
+                        fontSize: Sizes.size40,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
-                  ),
-                  secondChild: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: Sizes.size24),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Gaps.v40,
-                        const Text(
-                          'Second View',
-                          style: TextStyle(
-                            fontSize: Sizes.size40,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        Gaps.v20,
-                        Text(
-                          'Videos are personalized for you based on what you watch, like, and share.',
-                          style: TextStyle(
-                            fontSize: Sizes.size16,
-                            color: Colors.grey.shade500,
-                          ),
-                        ),
-                      ],
+                    Gaps.v20,
+                    Text(
+                      'Videos are personalized for you based on what you watch, like, and share.',
+                      style: TextStyle(
+                        fontSize: Sizes.size16,
+                        color: Colors.grey.shade500,
+                      ),
                     ),
-                  ),
-                  crossFadeState: _page == Page.first
-                      ? CrossFadeState.showFirst
-                      : CrossFadeState.showSecond,
-                  duration: const Duration(milliseconds: 300),),),
+                  ],
+                ),
+              ),
+              secondChild: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: Sizes.size24),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Gaps.v40,
+                    const Text(
+                      'Second View',
+                      style: TextStyle(
+                        fontSize: Sizes.size40,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    Gaps.v20,
+                    Text(
+                      'Videos are personalized for you based on what you watch, like, and share.',
+                      style: TextStyle(
+                        fontSize: Sizes.size16,
+                        color: Colors.grey.shade500,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              crossFadeState: _page == Page.first
+                  ? CrossFadeState.showFirst
+                  : CrossFadeState.showSecond,
+              duration: const Duration(milliseconds: 300),
+            ),
+          ),
         ),
         bottomNavigationBar: BottomAppBar(
           color: isDarkMode(context) ? Colors.black : Colors.white,

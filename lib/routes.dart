@@ -1,10 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:tiktok_v2/features/authentication/email_screen.dart';
 import 'package:tiktok_v2/features/authentication/login_screen.dart';
-import 'package:tiktok_v2/features/authentication/username_screen.dart';
+import 'package:tiktok_v2/features/authentication/sign_up_screen.dart';
+import 'package:tiktok_v2/features/onboarding/interests_screen.dart';
 import 'package:tiktok_v2/features/user/user_profile_screen.dart';
-import 'package:tiktok_v2/features/videos/video_recording_screen.dart';
 
 enum ScreenDef { name, path }
 
@@ -17,14 +15,11 @@ class Routes {
     ScreenDef.name: 'Log In',
     ScreenDef.path: '/login',
   };
-  static const userNameScreen = {
-    ScreenDef.name: 'Username',
-    ScreenDef.path: '/username',
+  static const interestsScreen = {
+    ScreenDef.name: 'Interests',
+    ScreenDef.path: '/tutorial',
   };
-  static const emailScreen = {
-    ScreenDef.name: 'Email',
-    ScreenDef.path: '/email',
-  };
+
   static const videoRecordingScreen = {
     ScreenDef.name: 'Viedo Recording',
     ScreenDef.path: '/video-recording',
@@ -36,7 +31,7 @@ final router = GoRouter(
     GoRoute(
       name: Routes.signupScreen[ScreenDef.name],
       path: Routes.signupScreen[ScreenDef.path]!,
-      builder: (context, state) => const VideoRecordingScreen(),
+      builder: (context, state) => const SignUpScreen(),
     ),
     GoRoute(
       name: Routes.loginScreen[ScreenDef.name],
@@ -44,30 +39,9 @@ final router = GoRouter(
       builder: (context, state) => const LoginScreen(),
     ),
     GoRoute(
-      name: Routes.userNameScreen[ScreenDef.name],
-      path: Routes.userNameScreen[ScreenDef.path]!,
-      pageBuilder: (context, state) {
-        return CustomTransitionPage(
-          child: const UsernameScreen(),
-          transitionsBuilder: (context, animation, secondaryAnimation, child) =>
-              FadeTransition(
-            opacity: animation,
-            child: ScaleTransition(
-              scale: animation,
-              child: child,
-            ),
-          ),
-        );
-      },
-      // builder: (context, state) => const UsernameScreen(),
-    ),
-    GoRoute(
-      name: Routes.emailScreen[ScreenDef.name],
-      path: Routes.emailScreen[ScreenDef.path]!,
-      builder: (context, state) {
-        final args = state.extra as EmailScreenArgs;
-        return EmailScreen(username: args.username);
-      },
+      name: Routes.interestsScreen[ScreenDef.name],
+      path: Routes.interestsScreen[ScreenDef.path]!,
+      builder: (context, state) => const InterestsScreen(),
     ),
     GoRoute(
       path: '/users/:username',

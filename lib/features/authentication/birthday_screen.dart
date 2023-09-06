@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tiktok_v2/constants/gaps.dart';
 import 'package:tiktok_v2/constants/sizes.dart';
 import 'package:tiktok_v2/features/authentication/widgets/form_button.dart';
-import 'package:tiktok_v2/features/onboarding/interests_screen.dart';
+import 'package:tiktok_v2/routes.dart';
 
 class BirthdayScreen extends StatefulWidget {
   const BirthdayScreen({super.key});
@@ -30,12 +31,13 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
   }
 
   void _onNextTap() {
-    Navigator.of(context).pushAndRemoveUntil(
-      MaterialPageRoute(
-        builder: (context) => const InterestsScreen(),
-      ),
-      (route) => false,
-    );
+    context.pushReplacementNamed(Routes.interestsScreen[ScreenDef.name]!);
+    // Navigator.of(context).pushAndRemoveUntil(
+    //   MaterialPageRoute(
+    //     builder: (context) => const InterestsScreen(),
+    //   ),
+    //   (route) => false,
+    // );
   }
 
   void _convertDateTimeToString(DateTime date) {
