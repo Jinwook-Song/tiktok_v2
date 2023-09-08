@@ -169,7 +169,8 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
     if (video == null) return;
     if (!mounted) return;
 
-    Navigator.of(context).push(
+    Navigator.push(
+      context,
       MaterialPageRoute(
         builder: (context) => VideoPreviewScreen(
           video: video,
@@ -194,6 +195,11 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
                     child: CameraPreview(
                       _cameraController,
                     ),
+                  ),
+                  const Positioned(
+                    top: Sizes.size16,
+                    left: Sizes.size16,
+                    child: CloseButton(),
                   ),
                   Positioned(
                     top: Sizes.size16,

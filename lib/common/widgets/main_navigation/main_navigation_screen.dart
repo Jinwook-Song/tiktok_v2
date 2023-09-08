@@ -35,6 +35,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   late bool _isHomeTab = _currentIndex == 0 ? true : false;
 
   void _onBottomNavigationTap(int tab) {
+    if (tab == 2) return;
     context.go('/${_tabs[tab]}');
     setState(() {
       _currentIndex = tab;
@@ -43,9 +44,6 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   }
 
   void _onRecordVideoTap() {
-    _currentIndex = 2;
-    setState(() {});
-
     context.pushNamed(Routes.videoRecordingScreen[ScreenDef.name]!);
     // Navigator.of(context).push(
     //   MaterialPageRoute(
