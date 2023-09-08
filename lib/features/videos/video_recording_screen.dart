@@ -63,7 +63,7 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
 
   @override
   Future<void> didChangeAppLifecycleState(AppLifecycleState state) async {
-    if (!_cameraController.value.isInitialized) return;
+    if (!mounted || !_cameraController.value.isInitialized) return;
 
     switch (state) {
       case AppLifecycleState.resumed:
