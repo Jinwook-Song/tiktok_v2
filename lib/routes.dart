@@ -1,8 +1,13 @@
 import 'package:go_router/go_router.dart';
+import 'package:tiktok_v2/common/widgets/main_navigation/main_navigation_screen.dart';
 import 'package:tiktok_v2/features/authentication/login_screen.dart';
 import 'package:tiktok_v2/features/authentication/sign_up_screen.dart';
+import 'package:tiktok_v2/features/inbox/activity_screen.dart';
+import 'package:tiktok_v2/features/inbox/chat_detail_screen.dart';
+import 'package:tiktok_v2/features/inbox/chats_screen.dart';
 import 'package:tiktok_v2/features/onboarding/interests_screen.dart';
 import 'package:tiktok_v2/features/user/user_profile_screen.dart';
+import 'package:tiktok_v2/features/videos/video_recording_screen.dart';
 
 enum ScreenDef { name, path }
 
@@ -19,6 +24,22 @@ class Routes {
     ScreenDef.name: 'Interests',
     ScreenDef.path: '/tutorial',
   };
+  static const mainScreen = {
+    ScreenDef.name: 'Main',
+    ScreenDef.path: '/:tab(home|discover|inbox|profile)',
+  };
+  static const activityScreen = {
+    ScreenDef.name: 'Activity',
+    ScreenDef.path: '/activity',
+  };
+  static const chatsScreen = {
+    ScreenDef.name: 'Chats',
+    ScreenDef.path: '/chats',
+  };
+  static const chatDetailScreen = {
+    ScreenDef.name: 'Chat Detail',
+    ScreenDef.path: ':chatId',
+  };
 
   static const videoRecordingScreen = {
     ScreenDef.name: 'Viedo Recording',
@@ -27,6 +48,7 @@ class Routes {
 }
 
 final router = GoRouter(
+  initialLocation: '/inbox',
   routes: [
     GoRoute(
       name: Routes.signupScreen[ScreenDef.name],
@@ -42,6 +64,41 @@ final router = GoRouter(
       name: Routes.interestsScreen[ScreenDef.name],
       path: Routes.interestsScreen[ScreenDef.path]!,
       builder: (context, state) => const InterestsScreen(),
+    ),
+    GoRoute(
+      name: Routes.mainScreen[ScreenDef.name],
+      path: Routes.mainScreen[ScreenDef.path]!,
+      builder: (context, state) {
+        final tab = state.pathParameters['tab']!;
+        return MainNavigationScreen(tab: tab);
+      },
+    ),
+    GoRoute(
+      name: Routes.activityScreen[ScreenDef.name],
+      path: Routes.activityScreen[ScreenDef.path]!,
+      builder: (context, state) => const ActivityScreen(),
+    ),
+    GoRoute(
+      name: Routes.chatsScreen[ScreenDef.name],
+      path: Routes.chatsScreen[ScreenDef.path]!,
+      builder: (context, state) => const ChatsScreen(),
+      routes: [
+        GoRoute(
+          name: Routes.chatDetailScreen[ScreenDef.name],
+          path: Routes.chatDetailScreen[ScreenDef.path]!,
+          builder: (context, state) {
+            final chatId = state.pathParameters['chatId']!;
+            return ChatDetailScreen(
+              chatId: chatId,
+            );
+          },
+        )
+      ],
+    ),
+    GoRoute(
+      name: Routes.videoRecordingScreen[ScreenDef.name],
+      path: Routes.videoRecordingScreen[ScreenDef.path]!,
+      builder: (context, state) => const VideoRecordingScreen(),
     ),
     GoRoute(
       path: '/users/:username',

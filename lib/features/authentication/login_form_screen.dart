@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tiktok_v2/constants/gaps.dart';
 import 'package:tiktok_v2/constants/sizes.dart';
 import 'package:tiktok_v2/features/authentication/widgets/form_button.dart';
-import 'package:tiktok_v2/features/onboarding/interests_screen.dart';
+import 'package:tiktok_v2/routes.dart';
 
 class LoginFormScreen extends StatefulWidget {
   const LoginFormScreen({super.key});
@@ -20,13 +21,14 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
     // validate(save) all of fields at once
     if (_formKey.currentState?.validate() == true) {
       _formKey.currentState!.save();
-      Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(
-          builder: (context) => const InterestsScreen(),
-        ),
-        // 이전 경로를 기억할 지 선택
-        (route) => false,
-      );
+      context.goNamed(Routes.interestsScreen[ScreenDef.name]!);
+      // Navigator.of(context).pushAndRemoveUntil(
+      //   MaterialPageRoute(
+      //     builder: (context) => const InterestsScreen(),
+      //   ),
+      //   // 이전 경로를 기억할 지 선택
+      //   (route) => false,
+      // );
     }
   }
 

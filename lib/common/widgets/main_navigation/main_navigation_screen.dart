@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tiktok_v2/constants/gaps.dart';
 import 'package:tiktok_v2/features/discover/discover_screen.dart';
 import 'package:tiktok_v2/features/inbox/inbox_screen.dart';
@@ -7,39 +8,55 @@ import 'package:tiktok_v2/common/widgets/main_navigation/widgets/navigation_tab.
 import 'package:tiktok_v2/common/widgets/main_navigation/widgets/record_video_button.dart';
 import 'package:tiktok_v2/features/user/user_profile_screen.dart';
 import 'package:tiktok_v2/features/videos/video_timeline_screen.dart';
+import 'package:tiktok_v2/routes.dart';
 import 'package:tiktok_v2/utils.dart';
 
+const List<String> _tabs = [
+  'home',
+  'discover',
+  '_',
+  'inbox',
+  'profile',
+];
+
 class MainNavigationScreen extends StatefulWidget {
-  const MainNavigationScreen({super.key});
+  final String tab;
+  const MainNavigationScreen({
+    super.key,
+    required this.tab,
+  });
 
   @override
   State<MainNavigationScreen> createState() => _MainNavigationScreenState();
 }
 
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
-  int _currentIndex = 0;
+  late int _currentIndex = _tabs.indexOf(widget.tab);
   late bool _isHomeTab = _currentIndex == 0 ? true : false;
 
   void _onBottomNavigationTap(int tab) {
-    _currentIndex = tab;
-    _isHomeTab = (tab == 0);
-    setState(() {});
+    context.go('/${_tabs[tab]}');
+    setState(() {
+      _currentIndex = tab;
+      _isHomeTab = (tab == 0);
+    });
   }
 
   void _onRecordVideoTap() {
     _currentIndex = 2;
     setState(() {});
 
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => Scaffold(
-          appBar: AppBar(
-            title: const Text('Record Video'),
-          ),
-        ),
-        fullscreenDialog: true,
-      ),
-    );
+    context.pushNamed(Routes.videoRecordingScreen[ScreenDef.name]!);
+    // Navigator.of(context).push(
+    //   MaterialPageRoute(
+    //     builder: (context) => Scaffold(
+    //       appBar: AppBar(
+    //         title: const Text('Record Video'),
+    //       ),
+    //     ),
+    //     fullscreenDialog: true,
+    //   ),
+    // );
   }
 
   @override

@@ -6,7 +6,11 @@ import 'package:tiktok_v2/constants/sizes.dart';
 import 'package:tiktok_v2/utils.dart';
 
 class ChatDetailScreen extends StatefulWidget {
-  const ChatDetailScreen({super.key});
+  final String chatId;
+  const ChatDetailScreen({
+    super.key,
+    required this.chatId,
+  });
 
   @override
   State<ChatDetailScreen> createState() => _ChatDetailScreenState();
@@ -15,6 +19,7 @@ class ChatDetailScreen extends StatefulWidget {
 class _ChatDetailScreenState extends State<ChatDetailScreen> {
   @override
   Widget build(BuildContext context) {
+    print(widget.chatId);
     return Scaffold(
       appBar: AppBar(
         title: ListTile(
@@ -47,9 +52,9 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
               )
             ],
           ),
-          title: const Text(
-            '니꼬',
-            style: TextStyle(
+          title: Text(
+            '니꼬 (${widget.chatId})',
+            style: const TextStyle(
               fontWeight: FontWeight.w600,
             ),
           ),
