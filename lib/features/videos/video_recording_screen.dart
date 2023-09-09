@@ -199,7 +199,9 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
                   const Positioned(
                     top: Sizes.size16,
                     left: Sizes.size16,
-                    child: CloseButton(),
+                    child: CloseButton(
+                      color: Colors.white,
+                    ),
                   ),
                   Positioned(
                     top: Sizes.size16,
@@ -210,6 +212,7 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
                           onPressed: _toggleCameraDirection,
                           icon: const Icon(
                             Icons.cameraswitch,
+                            color: Colors.white,
                           ),
                         ),
                         IconButton(

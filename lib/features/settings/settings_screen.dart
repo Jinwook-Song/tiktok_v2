@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tiktok_v2/common/widgets/theme_config/theme_config.dart';
 import 'package:tiktok_v2/common/widgets/video_config/video_config.dart';
 
@@ -43,17 +44,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
             ),
           ),
-          ValueListenableBuilder(
-            valueListenable: videoConfig,
-            builder: (context, value, child) => SwitchListTile.adaptive(
-              value: value,
-              onChanged: (value) {
-                videoConfig.value = !videoConfig.value;
-              },
-              activeColor: Theme.of(context).primaryColor,
-              title: const Text(
-                'Video mute by default',
-              ),
+          SwitchListTile.adaptive(
+            value: context.watch<VideoConfig>().isMuted,
+            onChanged: (value) {
+              context.read<VideoConfig>().toogleMute();
+            },
+            activeColor: Theme.of(context).primaryColor,
+            title: const Text(
+              'Video mute by default',
             ),
           ),
           CheckboxListTile.adaptive(
