@@ -29,14 +29,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
       ),
       body: ListView(
         children: [
-          SwitchListTile.adaptive(
-            value: VideoConfigData.of(context).videoMute,
-            onChanged: (value) {
-              VideoConfigData.of(context).toggleVideoMute();
-            },
-            activeColor: Theme.of(context).primaryColor,
-            title: const Text(
-              'Video mute by default',
+          ListenableBuilder(
+            listenable: videoConfig,
+            builder: (context, child) => SwitchListTile.adaptive(
+              value: videoConfig.videoMute,
+              onChanged: (value) {
+                videoConfig.toggleVideoMute();
+              },
+              activeColor: Theme.of(context).primaryColor,
+              title: const Text(
+                'Video mute by default',
+              ),
             ),
           ),
           CheckboxListTile.adaptive(

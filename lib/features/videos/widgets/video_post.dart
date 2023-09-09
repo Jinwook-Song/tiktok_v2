@@ -36,7 +36,7 @@ class _VideoPostState extends State<VideoPost>
   late AnimationController _animationController;
 
   bool _isPaused = false;
-  bool _isMuted = false;
+  bool _isMuted = videoConfig.videoMute;
   final _animationDuration = const Duration(milliseconds: 150);
 
   @override
@@ -50,6 +50,13 @@ class _VideoPostState extends State<VideoPost>
       upperBound: 1.5,
       duration: _animationDuration,
     );
+
+    videoConfig.addListener(() {
+      _isMuted = videoConfig.videoMute;
+      if (mounted) {
+        setState(() {});
+      }
+    });
   }
 
   @override
@@ -66,6 +73,12 @@ class _VideoPostState extends State<VideoPost>
     if (kIsWeb) {
       await _videoPlayerController.setVolume(0);
       _isMuted = true;
+    } else {
+      if (_isMuted) {
+        await _videoPlayerController.setVolume(0);
+      } else {
+        await _videoPlayerController.setVolume(1);
+      }
     }
     setState(() {});
 
@@ -108,13 +121,12 @@ class _VideoPostState extends State<VideoPost>
     setState(() {});
   }
 
-  void _toggleMute() {
+  void _toggleMute() async {
+    videoConfig.toggleVideoMute();
     if (_isMuted) {
-      _isMuted = false;
-      _videoPlayerController.setVolume(1);
+      await _videoPlayerController.setVolume(0);
     } else {
-      _isMuted = true;
-      _videoPlayerController.setVolume(0);
+      await _videoPlayerController.setVolume(1);
     }
     setState(() {});
   }
@@ -132,8 +144,6 @@ class _VideoPostState extends State<VideoPost>
 
   @override
   Widget build(BuildContext context) {
-    final videoMute = VideoConfigData.of(context).videoMute;
-
     return VisibilityDetector(
       key: Key('${widget.videoIndex}'),
       onVisibilityChanged: _onVisibilityChanged,
@@ -198,19 +208,6 @@ class _VideoPostState extends State<VideoPost>
                   ),
                 ),
               ],
-            ),
-          ),
-          Positioned(
-            top: 40,
-            left: 16,
-            child: IconButton(
-              onPressed: VideoConfigData.of(context).toggleVideoMute,
-              icon: Icon(
-                videoMute
-                    ? FontAwesomeIcons.volumeXmark
-                    : FontAwesomeIcons.volumeHigh,
-                color: Colors.white,
-              ),
             ),
           ),
           Positioned(
