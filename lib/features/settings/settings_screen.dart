@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:tiktok_v2/common/widgets/theme_config/theme_config.dart';
 import 'package:tiktok_v2/common/widgets/video_config/video_config.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -29,6 +30,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
       ),
       body: ListView(
         children: [
+          ValueListenableBuilder(
+            valueListenable: useDarkTheme,
+            builder: (context, value, child) => SwitchListTile.adaptive(
+              value: value,
+              onChanged: (value) {
+                useDarkTheme.value = !useDarkTheme.value;
+              },
+              activeColor: Theme.of(context).primaryColor,
+              title: const Text(
+                'Dark Theme',
+              ),
+            ),
+          ),
           ValueListenableBuilder(
             valueListenable: videoConfig,
             builder: (context, value, child) => SwitchListTile.adaptive(
