@@ -29,12 +29,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
       ),
       body: ListView(
         children: [
-          ListenableBuilder(
-            listenable: videoConfig,
-            builder: (context, child) => SwitchListTile.adaptive(
-              value: videoConfig.videoMute,
+          ValueListenableBuilder(
+            valueListenable: videoConfig,
+            builder: (context, value, child) => SwitchListTile.adaptive(
+              value: value,
               onChanged: (value) {
-                videoConfig.toggleVideoMute();
+                videoConfig.value = !videoConfig.value;
               },
               activeColor: Theme.of(context).primaryColor,
               title: const Text(

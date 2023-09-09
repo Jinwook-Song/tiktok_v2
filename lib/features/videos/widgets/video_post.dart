@@ -36,7 +36,7 @@ class _VideoPostState extends State<VideoPost>
   late AnimationController _animationController;
 
   bool _isPaused = false;
-  bool _isMuted = videoConfig.videoMute;
+  bool _isMuted = videoConfig.value;
   final _animationDuration = const Duration(milliseconds: 150);
 
   @override
@@ -52,7 +52,7 @@ class _VideoPostState extends State<VideoPost>
     );
 
     videoConfig.addListener(() {
-      _isMuted = videoConfig.videoMute;
+      _isMuted = videoConfig.value;
       if (mounted) {
         setState(() {});
       }
@@ -122,7 +122,7 @@ class _VideoPostState extends State<VideoPost>
   }
 
   void _toggleMute() async {
-    videoConfig.toggleVideoMute();
+    videoConfig.value = !videoConfig.value;
     if (_isMuted) {
       await _videoPlayerController.setVolume(0);
     } else {

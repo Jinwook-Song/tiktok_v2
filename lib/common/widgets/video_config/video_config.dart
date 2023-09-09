@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+final videoConfig = ValueNotifier(false);
+
+/** ChangeNotifier
 class VideoConfig extends ChangeNotifier {
   bool videoMute = false;
 
@@ -12,3 +15,5 @@ class VideoConfig extends ChangeNotifier {
 }
 
 final videoConfig = VideoConfig();
+*/
+
