@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tiktok_v2/common/widgets/theme_config/theme_config.dart';
-import 'package:tiktok_v2/common/widgets/video_config/video_config.dart';
 import 'package:tiktok_v2/constants/sizes.dart';
+import 'package:tiktok_v2/features/videos/repos/video_playback_config_repo.dart';
+import 'package:tiktok_v2/features/videos/view_model/video_playack_config_vm.dart';
 import 'package:tiktok_v2/generated/l10n.dart';
 import 'package:tiktok_v2/routes.dart';
 
@@ -19,7 +21,20 @@ void main() async {
   // 상단 바 컬러, 각 화면 마다 설정 할 수 있다.
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
 
-  runApp(const TikTokApp());
+  // SharedPreferences 초기화
+  final prefs = await SharedPreferences.getInstance();
+  final repository = VideoPlaybackConfigRepo(prefs);
+
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => VideoPlaybackConfigViewModel(repository),
+        )
+      ],
+      child: const TikTokApp(),
+    ),
+  );
 }
 
 class TikTokApp extends StatelessWidget {
@@ -32,112 +47,106 @@ class TikTokApp extends StatelessWidget {
     return ValueListenableBuilder(
       valueListenable: useDarkTheme,
       builder: (context, value, child) {
-        return MultiProvider(
-          providers: [
-            ChangeNotifierProvider(
-              create: (context) => VideoConfig(),
-            )
+        return MaterialApp.router(
+          routerConfig: router,
+          title: 'TikTok',
+          debugShowCheckedModeBanner: false,
+          localizationsDelegates: const [
+            S.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
           ],
-          child: MaterialApp.router(
-            routerConfig: router,
-            title: 'TikTok',
-            debugShowCheckedModeBanner: false,
-            localizationsDelegates: const [
-              S.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-              GlobalMaterialLocalizations.delegate,
-            ],
-            supportedLocales: const [
-              Locale('en'),
-              Locale('ko'),
-            ],
-            themeMode: value == true ? ThemeMode.dark : ThemeMode.light,
-            theme: ThemeData(
-              useMaterial3: true,
-              textTheme: Typography.blackCupertino,
-              colorScheme: ColorScheme.fromSeed(
-                brightness: Brightness.light,
-                seedColor: const Color(0xFFE9435A),
-              ),
-              primaryColor: const Color(0xFFE9435A),
-              scaffoldBackgroundColor: Colors.white,
-              appBarTheme: const AppBarTheme(
-                foregroundColor: Colors.black,
-                shadowColor: Colors.black,
-                surfaceTintColor: Colors.white,
-                backgroundColor: Colors.white,
-                titleTextStyle: TextStyle(
-                  color: Colors.black,
-                  fontSize: Sizes.size16,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-              bottomAppBarTheme: BottomAppBarTheme(
-                color: Colors.grey.shade100,
-                surfaceTintColor: Colors.white,
-              ),
-              inputDecorationTheme: InputDecorationTheme(
-                hintStyle: TextStyle(
-                  color: Colors.grey.shade500,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              tabBarTheme: TabBarTheme(
-                dividerColor: Colors.transparent,
-                indicatorColor: Colors.black,
-                unselectedLabelColor: Colors.grey.shade500,
-                labelColor: Colors.black,
-              ),
-              splashColor: Colors.transparent,
+          supportedLocales: const [
+            Locale('en'),
+            Locale('ko'),
+          ],
+          themeMode: value == true ? ThemeMode.dark : ThemeMode.light,
+          theme: ThemeData(
+            useMaterial3: true,
+            textTheme: Typography.blackCupertino,
+            colorScheme: ColorScheme.fromSeed(
+              brightness: Brightness.light,
+              seedColor: const Color(0xFFE9435A),
             ),
-            darkTheme: ThemeData(
-              useMaterial3: true,
-              textTheme: Typography.whiteCupertino,
-              colorScheme: ColorScheme.fromSeed(
-                brightness: Brightness.dark,
-                seedColor: const Color(0xFFE9435A),
+            primaryColor: const Color(0xFFE9435A),
+            scaffoldBackgroundColor: Colors.white,
+            appBarTheme: const AppBarTheme(
+              foregroundColor: Colors.black,
+              shadowColor: Colors.black,
+              surfaceTintColor: Colors.white,
+              backgroundColor: Colors.white,
+              titleTextStyle: TextStyle(
+                color: Colors.black,
+                fontSize: Sizes.size16,
+                fontWeight: FontWeight.w700,
               ),
-              primaryColor: const Color(0xFFE9435A),
-              scaffoldBackgroundColor: Colors.black,
-              appBarTheme: const AppBarTheme(
-                foregroundColor: Colors.white,
-                shadowColor: Colors.white,
-                surfaceTintColor: Colors.black,
-                backgroundColor: Colors.black,
-                titleTextStyle: TextStyle(
-                  color: Colors.white,
-                  fontSize: Sizes.size16,
-                  fontWeight: FontWeight.w700,
-                ),
-                iconTheme:
-                    IconThemeData(color: Color.fromRGBO(255, 255, 255, 0.99)),
-                actionsIconTheme:
-                    IconThemeData(color: Color.fromRGBO(255, 255, 255, 0.99)),
-              ),
-              iconTheme: const IconThemeData(
-                  color: Color.fromRGBO(255, 255, 255, 0.99)),
-              listTileTheme: const ListTileThemeData(
-                iconColor: Colors.white,
-              ),
-              bottomAppBarTheme: BottomAppBarTheme(
-                color: Colors.grey.shade900,
-                surfaceTintColor: Colors.black,
-              ),
-              inputDecorationTheme: InputDecorationTheme(
-                hintStyle: TextStyle(
-                  color: Colors.grey.shade500,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              tabBarTheme: TabBarTheme(
-                dividerColor: Colors.transparent,
-                indicatorColor: Colors.white,
-                unselectedLabelColor: Colors.grey.shade500,
-                labelColor: Colors.white,
-              ),
-              splashColor: Colors.transparent,
             ),
+            bottomAppBarTheme: BottomAppBarTheme(
+              color: Colors.grey.shade100,
+              surfaceTintColor: Colors.white,
+            ),
+            inputDecorationTheme: InputDecorationTheme(
+              hintStyle: TextStyle(
+                color: Colors.grey.shade500,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+            tabBarTheme: TabBarTheme(
+              dividerColor: Colors.transparent,
+              indicatorColor: Colors.black,
+              unselectedLabelColor: Colors.grey.shade500,
+              labelColor: Colors.black,
+            ),
+            splashColor: Colors.transparent,
+          ),
+          darkTheme: ThemeData(
+            useMaterial3: true,
+            textTheme: Typography.whiteCupertino,
+            colorScheme: ColorScheme.fromSeed(
+              brightness: Brightness.dark,
+              seedColor: const Color(0xFFE9435A),
+            ),
+            primaryColor: const Color(0xFFE9435A),
+            scaffoldBackgroundColor: Colors.black,
+            appBarTheme: const AppBarTheme(
+              foregroundColor: Colors.white,
+              shadowColor: Colors.white,
+              surfaceTintColor: Colors.black,
+              backgroundColor: Colors.black,
+              titleTextStyle: TextStyle(
+                color: Colors.white,
+                fontSize: Sizes.size16,
+                fontWeight: FontWeight.w700,
+              ),
+              iconTheme:
+                  IconThemeData(color: Color.fromRGBO(255, 255, 255, 0.99)),
+              actionsIconTheme:
+                  IconThemeData(color: Color.fromRGBO(255, 255, 255, 0.99)),
+            ),
+            iconTheme: const IconThemeData(
+              color: Color.fromRGBO(255, 255, 255, 0.99),
+            ),
+            listTileTheme: const ListTileThemeData(
+              iconColor: Colors.white,
+            ),
+            bottomAppBarTheme: BottomAppBarTheme(
+              color: Colors.grey.shade900,
+              surfaceTintColor: Colors.black,
+            ),
+            inputDecorationTheme: InputDecorationTheme(
+              hintStyle: TextStyle(
+                color: Colors.grey.shade500,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+            tabBarTheme: TabBarTheme(
+              dividerColor: Colors.transparent,
+              indicatorColor: Colors.white,
+              unselectedLabelColor: Colors.grey.shade500,
+              labelColor: Colors.white,
+            ),
+            splashColor: Colors.transparent,
           ),
         );
       },

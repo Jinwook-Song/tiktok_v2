@@ -4,19 +4,19 @@ class VideoConfig extends ChangeNotifier {
   bool isMuted = false;
   bool isAutoPlay = false;
 
-  void toogleMute() {
+  void togleMute() {
     isMuted = !isMuted;
     notifyListeners();
   }
 
-  void toggleAutoPlay() {
+  void togleAutoPlay() {
     isAutoPlay = !isAutoPlay;
     notifyListeners();
   }
 }
 
-/**
-final videoConfig = ValueNotifier(false);
+/** ValueNotifier
+ * final videoConfig = ValueNotifier(false);
  */
 
 /** ChangeNotifier

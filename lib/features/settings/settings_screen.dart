@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tiktok_v2/common/widgets/theme_config/theme_config.dart';
-import 'package:tiktok_v2/common/widgets/video_config/video_config.dart';
+import 'package:tiktok_v2/features/videos/view_model/video_playack_config_vm.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -45,9 +45,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
           ),
           SwitchListTile.adaptive(
-            value: context.watch<VideoConfig>().isMuted,
+            value: context.watch<VideoPlaybackConfigViewModel>().isMuted,
             onChanged: (value) {
-              context.read<VideoConfig>().toogleMute();
+              context.read<VideoPlaybackConfigViewModel>().setMuted(value);
             },
             activeColor: Theme.of(context).primaryColor,
             title: const Text(

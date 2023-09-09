@@ -2,11 +2,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:tiktok_v2/common/widgets/video_config/video_config.dart';
 import 'package:tiktok_v2/constants/gaps.dart';
 import 'package:tiktok_v2/constants/sizes.dart';
-import 'package:tiktok_v2/features/videos/widgets/video_button.dart';
-import 'package:tiktok_v2/features/videos/widgets/video_comments.dart';
+import 'package:tiktok_v2/features/videos/view_model/video_playack_config_vm.dart';
+import 'package:tiktok_v2/features/videos/views/widgets/video_button.dart';
+import 'package:tiktok_v2/features/videos/views/widgets/video_comments.dart';
 import 'package:tiktok_v2/generated/l10n.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
@@ -37,7 +37,7 @@ class _VideoPostState extends State<VideoPost>
   late AnimationController _animationController;
 
   bool _isPaused = false;
-  late bool _isMuted = context.watch<VideoConfig>().isMuted;
+  late bool _isMuted = context.watch<VideoPlaybackConfigViewModel>().isMuted;
   final _animationDuration = const Duration(milliseconds: 150);
 
   @override
@@ -116,9 +116,9 @@ class _VideoPostState extends State<VideoPost>
   }
 
   void _toggleMute() async {
-    context.read<VideoConfig>().toogleMute();
-
     _isMuted = !_isMuted;
+    context.read<VideoPlaybackConfigViewModel>().setMuted(_isMuted);
+
     if (_isMuted) {
       await _videoPlayerController.setVolume(0);
     } else {

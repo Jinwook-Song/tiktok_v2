@@ -4,7 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tiktok_v2/constants/sizes.dart';
-import 'package:tiktok_v2/features/videos/video_preview_screen.dart';
+import 'package:tiktok_v2/features/videos/views/video_preview_screen.dart';
 
 class VideoRecordingScreen extends StatefulWidget {
   const VideoRecordingScreen({super.key});
