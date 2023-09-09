@@ -36,8 +36,10 @@ class _VideoPostState extends State<VideoPost>
 
   late AnimationController _animationController;
 
-  bool _isPaused = false;
+  late bool _isPaused =
+      !context.read<VideoPlaybackConfigViewModel>().isAutoplay;
   late bool _isMuted = context.watch<VideoPlaybackConfigViewModel>().isMuted;
+
   final _animationDuration = const Duration(milliseconds: 150);
 
   @override
@@ -46,7 +48,7 @@ class _VideoPostState extends State<VideoPost>
     _initVideoPlayer();
     _animationController = AnimationController(
       vsync: this,
-      value: 1.5, // default
+      value: 1.0, // default
       lowerBound: 1.0,
       upperBound: 1.5,
       duration: _animationDuration,

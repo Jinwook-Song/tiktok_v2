@@ -54,6 +54,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
               'Video mute by default',
             ),
           ),
+          SwitchListTile.adaptive(
+            value: context.watch<VideoPlaybackConfigViewModel>().isAutoplay,
+            onChanged: (value) {
+              context.read<VideoPlaybackConfigViewModel>().setAutoplay(value);
+            },
+            activeColor: Theme.of(context).primaryColor,
+            title: const Text(
+              'Video autoplay by default',
+            ),
+          ),
           CheckboxListTile.adaptive(
             value: _notification,
             onChanged: _onNotificationChanged,
