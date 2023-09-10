@@ -24,7 +24,7 @@ class VideoPost extends ConsumerStatefulWidget {
   final bool isActivated;
 
   @override
-  VideoPostState createState() => VideoPostState();
+  ConsumerState<VideoPost> createState() => VideoPostState();
 }
 
 class VideoPostState extends ConsumerState<VideoPost>
