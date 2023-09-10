@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1004851603984",
+    "project_id": "tiktok-jw-v2",
+    "storage_bucket": "tiktok-jw-v2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1004851603984:android:66dba6f9bcfa7eca0bb895",
+        "android_client_info": {
+          "package_name": "com.example.tiktok_v2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgtPOBd-B8aKTGlx1FHkhEjLmezBd_XXg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

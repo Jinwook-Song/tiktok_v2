@@ -9,9 +9,15 @@ import 'package:tiktok_v2/features/videos/repos/video_playback_config_repo.dart'
 import 'package:tiktok_v2/features/videos/view_model/video_playback_config_vm.dart';
 import 'package:tiktok_v2/generated/l10n.dart';
 import 'package:tiktok_v2/routes.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   // 세로 화면 고정
   await SystemChrome.setPreferredOrientations([
