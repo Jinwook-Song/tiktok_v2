@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tiktok_v2/constants/gaps.dart';
 import 'package:tiktok_v2/constants/sizes.dart';
+import 'package:tiktok_v2/features/authentication/view_models/login_vm.dart';
 import 'package:tiktok_v2/features/authentication/views/widgets/form_button.dart';
-import 'package:tiktok_v2/routes.dart';
 
-class LoginFormScreen extends StatefulWidget {
+class LoginFormScreen extends ConsumerStatefulWidget {
   const LoginFormScreen({super.key});
 
   @override
-  State<LoginFormScreen> createState() => _LoginFormScreenState();
+  ConsumerState<LoginFormScreen> createState() => LoginFormScreenState();
 }
 
-class _LoginFormScreenState extends State<LoginFormScreen> {
+class LoginFormScreenState extends ConsumerState<LoginFormScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   final Map<String, String> _formData = {};
@@ -21,14 +21,12 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
     // validate(save) all of fields at once
     if (_formKey.currentState?.validate() == true) {
       _formKey.currentState!.save();
-      context.goNamed(Routes.interestsScreen[ScreenDef.name]!);
-      // Navigator.of(context).pushAndRemoveUntil(
-      //   MaterialPageRoute(
-      //     builder: (context) => const InterestsScreen(),
-      //   ),
-      //   // 이전 경로를 기억할 지 선택
-      //   (route) => false,
-      // );
+      print(_formData);
+      ref.read(loginProvider.notifier).loginWithEmailAndPassword(
+            context: context,
+            email: _formData['email']!,
+            password: _formData['password']!,
+          );
     }
   }
 
@@ -80,8 +78,8 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
                 Gaps.v40,
                 GestureDetector(
                   onTap: _onSubmitTap,
-                  child: const FormButton(
-                    disabled: false,
+                  child: FormButton(
+                    disabled: ref.watch(loginProvider).isLoading,
                     text: 'Log in',
                   ),
                 )

@@ -31,8 +31,7 @@ class BirthdayScreenState extends ConsumerState<BirthdayScreen> {
   }
 
   void _onNextTap() {
-    ref.read(signUpProvider.notifier).signUpWithEmailAndPassword();
-    // context.pushReplacementNamed(Routes.interestsScreen[ScreenDef.name]!);
+    ref.read(signUpProvider.notifier).signUpWithEmailAndPassword(context);
   }
 
   void _convertDateTimeToString(DateTime date) {

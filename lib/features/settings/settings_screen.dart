@@ -2,12 +2,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tiktok_v2/common/widgets/theme_config/theme_config.dart';
 import 'package:tiktok_v2/features/authentication/repos/auth_repo.dart';
 import 'package:tiktok_v2/features/videos/view_models/video_playback_config_vm.dart';
+import 'package:tiktok_v2/routes.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
+
+  void _signOut(BuildContext context, WidgetRef ref) {
+    ref.read(authProvider).signOut();
+    context.goNamed(Routes.signupScreen[ScreenDef.name]!);
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -131,7 +138,7 @@ class SettingsScreen extends ConsumerWidget {
                     ),
                   ),
                   CupertinoDialogAction(
-                    onPressed: () => ref.read(authProvider).signOut(),
+                    onPressed: () => _signOut(context, ref),
                     isDestructiveAction: true,
                     child: const Text('Yes'),
                   ),
@@ -165,7 +172,7 @@ class SettingsScreen extends ConsumerWidget {
                     ),
                   ),
                   CupertinoDialogAction(
-                    onPressed: () => ref.read(authProvider).signOut(),
+                    onPressed: () => _signOut(context, ref),
                     isDestructiveAction: true,
                     child: const Text('Yes'),
                   ),
@@ -198,7 +205,7 @@ class SettingsScreen extends ConsumerWidget {
                     ),
                   ),
                   CupertinoActionSheetAction(
-                    onPressed: () => ref.read(authProvider).signOut(),
+                    onPressed: () => _signOut(context, ref),
                     isDestructiveAction: true,
                     child: const Text('Yes'),
                   ),
@@ -241,7 +248,7 @@ class SettingsScreen extends ConsumerWidget {
                         ),
                       ),
                       GestureDetector(
-                        onTap: () => ref.read(authProvider).signOut(),
+                        onTap: () => _signOut(context, ref),
                         child: const Padding(
                           padding: EdgeInsets.all(8.0),
                           child: Text(
