@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tiktok_v2/common/widgets/theme_config/theme_config.dart';
 import 'package:tiktok_v2/constants/sizes.dart';
 import 'package:tiktok_v2/features/videos/repos/video_playback_config_repo.dart';
-import 'package:tiktok_v2/features/videos/view_model/video_playack_config_vm.dart';
+import 'package:tiktok_v2/features/videos/view_model/video_playback_config_vm.dart';
 import 'package:tiktok_v2/generated/l10n.dart';
 import 'package:tiktok_v2/routes.dart';
 
@@ -26,10 +26,12 @@ void main() async {
   final repository = VideoPlaybackConfigRepo(prefs);
 
   runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (context) => VideoPlaybackConfigViewModel(repository),
+    ProviderScope(
+      overrides: [
+        videoPlaybackConfigProvider.overrideWith(
+          () => VideoPlaybackConfigViewModel(
+            repository,
+          ),
         )
       ],
       child: const TikTokApp(),

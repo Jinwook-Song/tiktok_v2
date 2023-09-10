@@ -1,17 +1,17 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
 import 'package:tiktok_v2/constants/gaps.dart';
 import 'package:tiktok_v2/constants/sizes.dart';
-import 'package:tiktok_v2/features/videos/view_model/video_playack_config_vm.dart';
+import 'package:tiktok_v2/features/videos/view_model/video_playback_config_vm.dart';
 import 'package:tiktok_v2/features/videos/views/widgets/video_button.dart';
 import 'package:tiktok_v2/features/videos/views/widgets/video_comments.dart';
 import 'package:tiktok_v2/generated/l10n.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
-class VideoPost extends StatefulWidget {
+class VideoPost extends ConsumerStatefulWidget {
   const VideoPost({
     super.key,
     required this.onVideoFinished,
@@ -24,10 +24,10 @@ class VideoPost extends StatefulWidget {
   final bool isActivated;
 
   @override
-  State<VideoPost> createState() => _VideoPostState();
+  VideoPostState createState() => VideoPostState();
 }
 
-class _VideoPostState extends State<VideoPost>
+class VideoPostState extends ConsumerState<VideoPost>
     with SingleTickerProviderStateMixin {
   late final VideoPlayerController _videoPlayerController =
       VideoPlayerController.asset(
@@ -36,9 +36,8 @@ class _VideoPostState extends State<VideoPost>
 
   late AnimationController _animationController;
 
-  late bool _isPaused =
-      !context.read<VideoPlaybackConfigViewModel>().isAutoplay;
-  late bool _isMuted = context.watch<VideoPlaybackConfigViewModel>().isMuted;
+  late bool _isPaused = !ref.read(videoPlaybackConfigProvider).autoplay;
+  late bool _isMuted = ref.watch(videoPlaybackConfigProvider).muted;
 
   final _animationDuration = const Duration(milliseconds: 150);
 
@@ -119,7 +118,7 @@ class _VideoPostState extends State<VideoPost>
 
   void _toggleMute() async {
     _isMuted = !_isMuted;
-    context.read<VideoPlaybackConfigViewModel>().setMuted(_isMuted);
+    ref.read(videoPlaybackConfigProvider.notifier).setMuted(_isMuted);
 
     if (_isMuted) {
       await _videoPlayerController.setVolume(0);
