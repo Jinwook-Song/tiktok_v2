@@ -45,18 +45,18 @@ void main() async {
   );
 }
 
-class TikTokApp extends StatelessWidget {
+class TikTokApp extends ConsumerWidget {
   const TikTokApp({super.key});
 
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     // S.load(const Locale('en'));
     return ValueListenableBuilder(
       valueListenable: useDarkTheme,
       builder: (context, value, child) {
         return MaterialApp.router(
-          routerConfig: router,
+          routerConfig: ref.watch(routerProvider),
           title: 'TikTok',
           debugShowCheckedModeBanner: false,
           localizationsDelegates: const [

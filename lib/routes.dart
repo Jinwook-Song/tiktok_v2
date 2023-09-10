@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tiktok_v2/common/widgets/main_navigation/main_navigation_screen.dart';
-import 'package:tiktok_v2/features/authentication/login_screen.dart';
-import 'package:tiktok_v2/features/authentication/sign_up_screen.dart';
+import 'package:tiktok_v2/features/authentication/repos/auth_repo.dart';
+import 'package:tiktok_v2/features/authentication/views/login_screen.dart';
+import 'package:tiktok_v2/features/authentication/views/sign_up_screen.dart';
 import 'package:tiktok_v2/features/inbox/activity_screen.dart';
 import 'package:tiktok_v2/features/inbox/chat_detail_screen.dart';
 import 'package:tiktok_v2/features/inbox/chats_screen.dart';
@@ -49,9 +50,19 @@ class Routes {
   };
 }
 
-final router = Provider((ref) {
+final routerProvider = Provider((ref) {
   return GoRouter(
     initialLocation: '/home',
+    redirect: (context, state) {
+      final isLoggedIn = ref.read(authProvider).isLoggedIn;
+      if (!isLoggedIn) {
+        if (state.matchedLocation != Routes.signupScreen[ScreenDef.path] &&
+            state.matchedLocation != Routes.loginScreen[ScreenDef.path]) {
+          return Routes.signupScreen[ScreenDef.path];
+        }
+      }
+      return null;
+    },
     routes: [
       GoRoute(
         name: Routes.signupScreen[ScreenDef.name],

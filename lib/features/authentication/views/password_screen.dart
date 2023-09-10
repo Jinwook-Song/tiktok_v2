@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_v2/constants/gaps.dart';
 import 'package:tiktok_v2/constants/sizes.dart';
-import 'package:tiktok_v2/features/authentication/birthday_screen.dart';
-import 'package:tiktok_v2/features/authentication/widgets/form_button.dart';
+import 'package:tiktok_v2/features/authentication/views/birthday_screen.dart';
+import 'package:tiktok_v2/features/authentication/views/widgets/form_button.dart';
 
 class PasswordScreen extends StatefulWidget {
   const PasswordScreen({super.key});
@@ -62,9 +62,11 @@ class _PasswordScreenState extends State<PasswordScreen> {
 
   void _onSubmit() {
     if (_isPasswordValid()[0] && _isPasswordValid()[1]) {
-      Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => const BirthdayScreen(),
-      ),);
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => const BirthdayScreen(),
+        ),
+      );
     }
   }
 

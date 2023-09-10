@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tiktok_v2/constants/gaps.dart';
 import 'package:tiktok_v2/constants/sizes.dart';
-import 'package:tiktok_v2/features/authentication/password_screen.dart';
-import 'package:tiktok_v2/features/authentication/widgets/form_button.dart';
+import 'package:tiktok_v2/features/authentication/views/password_screen.dart';
+import 'package:tiktok_v2/features/authentication/views/widgets/form_button.dart';
 
 class EmailScreenArgs {
   final String username;
