@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_v2/constants/gaps.dart';
 import 'package:tiktok_v2/constants/sizes.dart';
-import 'package:tiktok_v2/features/videos/view_model/video_playback_config_vm.dart';
+import 'package:tiktok_v2/features/videos/view_models/video_playback_config_vm.dart';
 import 'package:tiktok_v2/features/videos/views/widgets/video_button.dart';
 import 'package:tiktok_v2/features/videos/views/widgets/video_comments.dart';
 import 'package:tiktok_v2/generated/l10n.dart';

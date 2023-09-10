@@ -1,19 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tiktok_v2/constants/gaps.dart';
 import 'package:tiktok_v2/constants/sizes.dart';
+import 'package:tiktok_v2/features/authentication/view_models/signup_vm.dart';
 import 'package:tiktok_v2/features/authentication/views/widgets/form_button.dart';
-import 'package:tiktok_v2/routes.dart';
 
-class BirthdayScreen extends StatefulWidget {
+class BirthdayScreen extends ConsumerStatefulWidget {
   const BirthdayScreen({super.key});
 
   @override
-  State<BirthdayScreen> createState() => _BirthdayScreenState();
+  ConsumerState<BirthdayScreen> createState() => BirthdayScreenState();
 }
 
-class _BirthdayScreenState extends State<BirthdayScreen> {
+class BirthdayScreenState extends ConsumerState<BirthdayScreen> {
   final TextEditingController _birthdayController = TextEditingController();
 
   DateTime today = DateTime.now();
@@ -31,13 +31,8 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
   }
 
   void _onNextTap() {
-    context.pushReplacementNamed(Routes.interestsScreen[ScreenDef.name]!);
-    // Navigator.of(context).pushAndRemoveUntil(
-    //   MaterialPageRoute(
-    //     builder: (context) => const InterestsScreen(),
-    //   ),
-    //   (route) => false,
-    // );
+    ref.read(signUpProvider.notifier).signUpWithEmailAndPassword();
+    // context.pushReplacementNamed(Routes.interestsScreen[ScreenDef.name]!);
   }
 
   void _convertDateTimeToString(DateTime date) {
@@ -98,7 +93,9 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
               Gaps.v20,
               GestureDetector(
                 onTap: _onNextTap,
-                child: const FormButton(disabled: false),
+                child: FormButton(
+                  disabled: ref.watch(signUpProvider).isLoading,
+                ),
               ),
               Gaps.v60,
               SizedBox(
