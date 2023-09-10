@@ -51,6 +51,8 @@ class Routes {
 }
 
 final routerProvider = Provider((ref) {
+  // auth state에 변화가 생기면 Provider가 rebuild 된다.
+  ref.watch(authStateProvider);
   return GoRouter(
     initialLocation: '/home',
     redirect: (context, state) {

@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tiktok_v2/common/widgets/theme_config/theme_config.dart';
+import 'package:tiktok_v2/features/authentication/repos/auth_repo.dart';
 import 'package:tiktok_v2/features/videos/view_models/video_playback_config_vm.dart';
 
 class SettingsScreen extends ConsumerWidget {
@@ -130,7 +131,7 @@ class SettingsScreen extends ConsumerWidget {
                     ),
                   ),
                   CupertinoDialogAction(
-                    onPressed: () => Navigator.of(context).pop(),
+                    onPressed: () => ref.read(authProvider).signOut(),
                     isDestructiveAction: true,
                     child: const Text('Yes'),
                   ),
@@ -164,7 +165,7 @@ class SettingsScreen extends ConsumerWidget {
                     ),
                   ),
                   CupertinoDialogAction(
-                    onPressed: () => Navigator.of(context).pop(),
+                    onPressed: () => ref.read(authProvider).signOut(),
                     isDestructiveAction: true,
                     child: const Text('Yes'),
                   ),
@@ -197,7 +198,7 @@ class SettingsScreen extends ConsumerWidget {
                     ),
                   ),
                   CupertinoActionSheetAction(
-                    onPressed: () => Navigator.of(context).pop(),
+                    onPressed: () => ref.read(authProvider).signOut(),
                     isDestructiveAction: true,
                     child: const Text('Yes'),
                   ),
@@ -240,7 +241,7 @@ class SettingsScreen extends ConsumerWidget {
                         ),
                       ),
                       GestureDetector(
-                        onTap: () => Navigator.of(context).pop(),
+                        onTap: () => ref.read(authProvider).signOut(),
                         child: const Padding(
                           padding: EdgeInsets.all(8.0),
                           child: Text(
