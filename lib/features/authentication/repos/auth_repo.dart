@@ -32,6 +32,11 @@ class AuthRepo {
   Future<void> signOut() async {
     await _firebaseAuth.signOut();
   }
+
+  Future<void> signInWithGitHub() async {
+    GithubAuthProvider githubProvider = GithubAuthProvider();
+    await _firebaseAuth.signInWithProvider(githubProvider);
+  }
 }
 
 final authProvider = Provider((ref) => AuthRepo());

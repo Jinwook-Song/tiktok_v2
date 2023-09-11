@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tiktok_v2/constants/gaps.dart';
 import 'package:tiktok_v2/constants/sizes.dart';
+import 'package:tiktok_v2/features/authentication/view_models/social_auth_vm.dart';
 import 'package:tiktok_v2/features/authentication/views/username_screen.dart';
 import 'package:tiktok_v2/features/authentication/views/widgets/auth_button.dart';
 import 'package:tiktok_v2/generated/l10n.dart';
 import 'package:tiktok_v2/routes.dart';
 
-class SignUpScreen extends StatelessWidget {
+class SignUpScreen extends ConsumerWidget {
   const SignUpScreen({super.key});
 
   void _onLoginTap(BuildContext context) {
@@ -22,42 +24,14 @@ class SignUpScreen extends StatelessWidget {
         builder: (context) => const UsernameScreen(),
       ),
     );
+  }
 
-    // Navigator.of(context).pushNamed(Routes.userNameScreen);
-
-    // Navigator.of(context).push(
-    //   PageRouteBuilder(
-    //     transitionDuration: const Duration(milliseconds: 300),
-    //     reverseTransitionDuration: const Duration(milliseconds: 300),
-    //     pageBuilder: (context, animation, secondaryAnimation) =>
-    //         const UsernameScreen(),
-    //     transitionsBuilder: (
-    //       context,
-    //       animation,
-    //       secondaryAnimation,
-    //       child,
-    //     ) {
-    //       final offsetAnimation = Tween(
-    //         begin: const Offset(0, 1),
-    //         end: Offset.zero,
-    //       ).animate(
-    //         animation,
-    //       );
-
-    //       return SlideTransition(
-    //         position: offsetAnimation,
-    //         child: FadeTransition(
-    //           opacity: animation,
-    //           child: child,
-    //         ),
-    //       );
-    //     },
-    //   ),
-    // );
+  void _onGithubSignIn(BuildContext context, WidgetRef ref) {
+    ref.read(socialAuthProvider.notifier).signInWithGitHub(context);
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return OrientationBuilder(
       builder: (context, orientation) {
         return Scaffold(
@@ -92,6 +66,14 @@ class SignUpScreen extends StatelessWidget {
                     const AuthButton(
                       text: 'Continue with Apple',
                       icon: Icon(FontAwesomeIcons.apple),
+                    ),
+                    Gaps.v16,
+                    GestureDetector(
+                      onTap: () => _onGithubSignIn(context, ref),
+                      child: const AuthButton(
+                        text: 'Continue with Github',
+                        icon: Icon(FontAwesomeIcons.github),
+                      ),
                     ),
                   ],
                   if (orientation == Orientation.landscape)
