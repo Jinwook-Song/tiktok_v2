@@ -8,6 +8,11 @@ class UserRepo {
   Future<void> createUserProfile(UserProfileModel profile) async {
     _firestore.collection('users').doc(profile.uid).set(profile.toJson());
   }
+
+  Future<Map<String, dynamic>?> findUserProfile(String uid) async {
+    final doc = await _firestore.collection('users').doc(uid).get();
+    return doc.data();
+  }
 }
 
 final userProvider = Provider((ref) => UserRepo());
