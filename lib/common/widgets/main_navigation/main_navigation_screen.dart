@@ -6,7 +6,7 @@ import 'package:tiktok_v2/features/discover/discover_screen.dart';
 import 'package:tiktok_v2/features/inbox/inbox_screen.dart';
 import 'package:tiktok_v2/common/widgets/main_navigation/widgets/navigation_tab.dart';
 import 'package:tiktok_v2/common/widgets/main_navigation/widgets/record_video_button.dart';
-import 'package:tiktok_v2/features/user/user_profile_screen.dart';
+import 'package:tiktok_v2/features/user/views/user_profile_screen.dart';
 import 'package:tiktok_v2/features/videos/views/video_timeline_screen.dart';
 import 'package:tiktok_v2/routes.dart';
 import 'package:tiktok_v2/utils.dart';

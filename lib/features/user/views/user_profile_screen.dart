@@ -4,7 +4,7 @@ import 'package:tiktok_v2/common/widgets/theme_config/theme_config.dart';
 import 'package:tiktok_v2/constants/gaps.dart';
 import 'package:tiktok_v2/constants/sizes.dart';
 import 'package:tiktok_v2/features/settings/settings_screen.dart';
-import 'package:tiktok_v2/features/user/widgets/persistent_tab_bar.dart';
+import 'package:tiktok_v2/features/user/views/widgets/persistent_tab_bar.dart';
 import 'package:tiktok_v2/utils.dart';
 
 class UserProfileScreen extends StatefulWidget {

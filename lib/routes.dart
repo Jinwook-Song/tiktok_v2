@@ -9,7 +9,7 @@ import 'package:tiktok_v2/features/inbox/activity_screen.dart';
 import 'package:tiktok_v2/features/inbox/chat_detail_screen.dart';
 import 'package:tiktok_v2/features/inbox/chats_screen.dart';
 import 'package:tiktok_v2/features/onboarding/interests_screen.dart';
-import 'package:tiktok_v2/features/user/user_profile_screen.dart';
+import 'package:tiktok_v2/features/user/views/user_profile_screen.dart';
 import 'package:tiktok_v2/features/videos/views/video_recording_screen.dart';
 
 enum ScreenDef { name, path }
