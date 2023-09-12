@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tiktok_v2/common/widgets/theme_config/theme_config.dart';
 import 'package:tiktok_v2/constants/sizes.dart';
@@ -18,6 +19,8 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  GoRouter.optionURLReflectsImperativeAPIs = true;
 
   // 세로 화면 고정
   await SystemChrome.setPreferredOrientations([
