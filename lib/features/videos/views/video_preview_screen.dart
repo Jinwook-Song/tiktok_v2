@@ -4,7 +4,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:tiktok_v2/features/videos/view_models/video_timeline_vm.dart';
+import 'package:tiktok_v2/features/videos/view_models/video_upload_vm.dart';
 import 'package:video_player/video_player.dart';
 import 'package:gallery_saver/gallery_saver.dart';
 
@@ -58,9 +58,14 @@ class VideoPreviewScreenState extends ConsumerState<VideoPreviewScreen> {
   }
 
   void _onUploadTap() {
-    if (ref.watch(videoTimelineProvider).isLoading) return;
+    if (ref.watch(videoUploadProvider).isLoading) return;
 
-    ref.read(videoTimelineProvider.notifier).uploadVideo();
+    ref.read(videoUploadProvider.notifier).uploadVideo(
+          context: context,
+          video: File(
+            widget.video.path,
+          ),
+        );
   }
 
   @override
@@ -80,7 +85,7 @@ class VideoPreviewScreenState extends ConsumerState<VideoPreviewScreen> {
             ),
           IconButton(
             onPressed: _onUploadTap,
-            icon: ref.watch(videoTimelineProvider).isLoading
+            icon: ref.watch(videoUploadProvider).isLoading
                 ? const CircularProgressIndicator.adaptive()
                 : const Icon(
                     FontAwesomeIcons.cloudArrowUp,

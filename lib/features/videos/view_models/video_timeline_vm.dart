@@ -4,11 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tiktok_v2/features/videos/models/video_model.dart';
 
 class VideoTimelineViewModel extends AsyncNotifier<List<VideoModel>> {
-  List<VideoModel> _list = [
-    VideoModel(
-      title: 'first video',
-    )
-  ];
+  List<VideoModel> _list = [];
   @override
   FutureOr<List<VideoModel>> build() async {
     // fetch data from api
@@ -21,8 +17,7 @@ class VideoTimelineViewModel extends AsyncNotifier<List<VideoModel>> {
     // trigger loading state
     state = const AsyncValue.loading();
     await Future.delayed(const Duration(seconds: 3));
-    final newVideo = VideoModel(title: DateTime.now().toString());
-    _list = [..._list, newVideo];
+    _list = [..._list];
     state = AsyncValue.data(_list);
   }
 }
