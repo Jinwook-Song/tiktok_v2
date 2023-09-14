@@ -17,6 +17,7 @@ class VideoTimelineScreen extends ConsumerStatefulWidget {
 }
 
 class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
+  int _videoCount = 0;
   final PageController _pageController = PageController();
   final _scrollDuration = const Duration(milliseconds: 50);
   final _scrollCurve = Curves.easeOut;
@@ -33,6 +34,11 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
       duration: _scrollDuration,
       curve: _scrollCurve,
     );
+
+    if (page == _videoCount - 1) {
+      // fetch more video
+      ref.watch(videoTimelineProvider.notifier).fecthNextVideos();
+    }
   }
 
   void _onVideoFinished() {
@@ -60,26 +66,29 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
               ),
             ),
           ),
-          data: (videos) => RefreshIndicator(
-            onRefresh: _onRefresh,
-            edgeOffset: 20,
-            displacement: 40,
-            child: PageView.builder(
-              controller: _pageController,
-              onPageChanged: _onPageChanged,
-              scrollDirection: Axis.vertical,
-              itemCount: videos.length,
-              itemBuilder: (context, index) {
-                final videoData = videos[index];
-                return VideoPost(
-                  isActivated: widget.isActivated,
-                  onVideoFinished: _onVideoFinished,
-                  videoIndex: index,
-                  videoData: videoData,
-                );
-              },
-            ),
-          ),
+          data: (videos) {
+            _videoCount = videos.length;
+            return RefreshIndicator(
+              onRefresh: _onRefresh,
+              edgeOffset: 20,
+              displacement: 40,
+              child: PageView.builder(
+                controller: _pageController,
+                onPageChanged: _onPageChanged,
+                scrollDirection: Axis.vertical,
+                itemCount: videos.length,
+                itemBuilder: (context, index) {
+                  final videoData = videos[index];
+                  return VideoPost(
+                    isActivated: widget.isActivated,
+                    onVideoFinished: _onVideoFinished,
+                    videoIndex: index,
+                    videoData: videoData,
+                  );
+                },
+              ),
+            );
+          },
         );
   }
 }

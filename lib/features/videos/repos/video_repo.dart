@@ -23,11 +23,19 @@ class VideoRepo {
     await _firestore.collection('videos').add(video.toJson());
   }
 
-  Future<QuerySnapshot<Map<String, dynamic>>> fetchVideos() {
-    return _firestore
-        .collection('videos')
-        .orderBy('createdAt', descending: true)
-        .get();
+  Future<QuerySnapshot<Map<String, dynamic>>> fetchVideos({
+    int? lastVideoCreatedAt,
+  }) {
+    final query = _firestore
+        .collection("videos")
+        .orderBy("createdAt", descending: true)
+        .limit(2);
+
+    if (lastVideoCreatedAt == null) {
+      return query.get();
+    } else {
+      return query.startAfter([lastVideoCreatedAt]).get();
+    }
   }
 }
 
