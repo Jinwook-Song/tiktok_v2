@@ -70,10 +70,12 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
               scrollDirection: Axis.vertical,
               itemCount: videos.length,
               itemBuilder: (context, index) {
+                final videoData = videos[index];
                 return VideoPost(
                   isActivated: widget.isActivated,
                   onVideoFinished: _onVideoFinished,
                   videoIndex: index,
+                  videoData: videoData,
                 );
               },
             ),
