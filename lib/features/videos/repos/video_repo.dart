@@ -38,14 +38,26 @@ class VideoRepo {
     }
   }
 
-  Future<void> likeVideo({
+  Future<void> toggleLikeVideo({
     required String videoId,
     required String uid,
     required String thumbnailUrl,
   }) async {
     final query = _firestore.collection('likes').doc('${uid}_$videoId');
     final like = await query.get();
-    if (!like.exists) {
+    if (like.exists) {
+      await query.delete();
+      await _firestore
+          .collection('users')
+          .doc(uid)
+          .collection('likes')
+          .doc(videoId)
+          .delete();
+      await _firestore
+          .collection('videos')
+          .doc(videoId)
+          .update({'likes': FieldValue.increment(-1)});
+    } else {
       await query.set({'createdAt': DateTime.now().millisecondsSinceEpoch});
       await _firestore
           .collection('users')
@@ -56,6 +68,10 @@ class VideoRepo {
         'videoId': videoId,
         'thumbnailUrl': thumbnailUrl,
       });
+      await _firestore
+          .collection('videos')
+          .doc(videoId)
+          .update({'likes': FieldValue.increment(1)});
     }
   }
 }

@@ -145,7 +145,7 @@ class VideoPostState extends ConsumerState<VideoPost>
   }
 
   void _onLikeTap() {
-    ref.read(videoPostProvider(widget.videoData.id).notifier).likeVideo();
+    ref.read(videoPostProvider(widget.videoData.id).notifier).toggleLikeVideo();
   }
 
   @override
@@ -255,9 +255,7 @@ class VideoPostState extends ConsumerState<VideoPost>
                   onTap: _onLikeTap,
                   child: VideoButton(
                     icon: FontAwesomeIcons.solidHeart,
-                    text: S
-                        .of(context)
-                        .videoLikeCounts(widget.videoData.comments),
+                    text: S.of(context).videoLikeCounts(widget.videoData.likes),
                   ),
                 ),
                 Gaps.v20,
@@ -267,7 +265,7 @@ class VideoPostState extends ConsumerState<VideoPost>
                     icon: FontAwesomeIcons.solidComment,
                     text: S
                         .of(context)
-                        .videoCommentCounts(widget.videoData.likes),
+                        .videoCommentCounts(widget.videoData.comments),
                   ),
                 ),
                 Gaps.v20,
