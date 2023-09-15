@@ -41,11 +41,22 @@ class VideoRepo {
   Future<void> likeVideo({
     required String videoId,
     required String uid,
+    required String thumbnailUrl,
   }) async {
-    await _firestore.collection('likes').add({
-      'videoId': videoId,
-      'uid': uid,
-    });
+    final query = _firestore.collection('likes').doc('${uid}_$videoId');
+    final like = await query.get();
+    if (!like.exists) {
+      await query.set({'createdAt': DateTime.now().millisecondsSinceEpoch});
+      await _firestore
+          .collection('users')
+          .doc(uid)
+          .collection('likes')
+          .doc(videoId)
+          .set({
+        'videoId': videoId,
+        'thumbnailUrl': thumbnailUrl,
+      });
+    }
   }
 }
 

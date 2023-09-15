@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tiktok_v2/features/authentication/repos/auth_repo.dart';
 import 'package:tiktok_v2/features/videos/repos/video_repo.dart';
+import 'package:tiktok_v2/features/videos/view_models/video_timeline_vm.dart';
 
 // Video creator가 누구인지 미리 알기위해 인자를 받아 초기화
 class VideoPostViewModel extends FamilyAsyncNotifier<void, String> {
@@ -17,7 +18,13 @@ class VideoPostViewModel extends FamilyAsyncNotifier<void, String> {
 
   Future<void> likeVideo() async {
     final uid = ref.read(authProvider).user!.uid;
-    await _videoRepo.likeVideo(videoId: _videoId, uid: uid);
+    final videos = ref.watch(videoTimelineProvider).value;
+    final video = videos!.firstWhere((video) => video.id == _videoId);
+    await _videoRepo.likeVideo(
+      videoId: _videoId,
+      uid: uid,
+      thumbnailUrl: video.thumbnailUrl,
+    );
   }
 }
 
