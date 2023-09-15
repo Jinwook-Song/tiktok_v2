@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:tiktok_v2/common/widgets/theme_config/theme_config.dart';
 
 bool isDarkMode(BuildContext context) {
@@ -18,3 +19,5 @@ void showFirebaseErrorSnackBar(
   );
   ScaffoldMessenger.of(context).showSnackBar(snackBar);
 }
+
+final DateFormat formatter = DateFormat('EEE, M/d/y, HH:mm');

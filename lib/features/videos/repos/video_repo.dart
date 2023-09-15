@@ -37,6 +37,16 @@ class VideoRepo {
       return query.startAfter([lastVideoCreatedAt]).get();
     }
   }
+
+  Future<void> likeVideo({
+    required String videoId,
+    required String uid,
+  }) async {
+    await _firestore.collection('likes').add({
+      'videoId': videoId,
+      'uid': uid,
+    });
+  }
 }
 
 final videoProvider = Provider((ref) => VideoRepo());

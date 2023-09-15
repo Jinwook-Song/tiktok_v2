@@ -6,9 +6,11 @@ import 'package:tiktok_v2/constants/gaps.dart';
 import 'package:tiktok_v2/constants/sizes.dart';
 import 'package:tiktok_v2/features/videos/models/video_model.dart';
 import 'package:tiktok_v2/features/videos/view_models/video_playback_config_vm.dart';
+import 'package:tiktok_v2/features/videos/view_models/video_post_vm.dart';
 import 'package:tiktok_v2/features/videos/views/widgets/video_button.dart';
 import 'package:tiktok_v2/features/videos/views/widgets/video_comments.dart';
 import 'package:tiktok_v2/generated/l10n.dart';
+import 'package:tiktok_v2/utils.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
@@ -142,6 +144,10 @@ class VideoPostState extends ConsumerState<VideoPost>
     _toggleVideoPlaying();
   }
 
+  void _onLikeTap() {
+    ref.read(videoPostProvider(widget.videoData.id).notifier).likeVideo();
+  }
+
   @override
   Widget build(BuildContext context) {
     return VisibilityDetector(
@@ -202,7 +208,11 @@ class VideoPostState extends ConsumerState<VideoPost>
                 ),
                 Gaps.v8,
                 Text(
-                  widget.videoData.title,
+                  formatter.format(
+                    DateTime.fromMillisecondsSinceEpoch(
+                      widget.videoData.createdAt,
+                    ),
+                  ),
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: Sizes.size12,
@@ -241,10 +251,14 @@ class VideoPostState extends ConsumerState<VideoPost>
                         ),
                 ),
                 Gaps.v20,
-                VideoButton(
-                  icon: FontAwesomeIcons.solidHeart,
-                  text:
-                      S.of(context).videoLikeCounts(widget.videoData.comments),
+                GestureDetector(
+                  onTap: _onLikeTap,
+                  child: VideoButton(
+                    icon: FontAwesomeIcons.solidHeart,
+                    text: S
+                        .of(context)
+                        .videoLikeCounts(widget.videoData.comments),
+                  ),
                 ),
                 Gaps.v20,
                 GestureDetector(

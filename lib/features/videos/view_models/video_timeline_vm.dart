@@ -14,7 +14,14 @@ class VideoTimelineViewModel extends AsyncNotifier<List<VideoModel>> {
     final videos = await _videoRepo.fetchVideos(
       lastVideoCreatedAt: lastVideoCreatedAt,
     );
-    return videos.docs.map((doc) => VideoModel.fromJson(doc.data())).toList();
+    return videos.docs
+        .map(
+          (doc) => VideoModel.fromJson(
+            json: doc.data(),
+            videoId: doc.id,
+          ),
+        )
+        .toList();
   }
 
   @override
