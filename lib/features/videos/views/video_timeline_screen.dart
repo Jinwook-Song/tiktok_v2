@@ -36,8 +36,7 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
     );
 
     if (page == _videoCount - 1) {
-      // fetch more video
-      ref.watch(videoTimelineProvider.notifier).fecthNextVideos();
+      ref.read(videoTimelineProvider.notifier).fecthNextVideos();
     }
   }
 
@@ -48,7 +47,7 @@ class VideoTimelineScreenState extends ConsumerState<VideoTimelineScreen> {
   }
 
   Future<void> _onRefresh() async {
-    return Future.delayed(const Duration(milliseconds: 1000));
+    ref.read(videoTimelineProvider.notifier).refresh();
   }
 
   @override

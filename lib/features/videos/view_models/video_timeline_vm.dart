@@ -29,7 +29,14 @@ class VideoTimelineViewModel extends AsyncNotifier<List<VideoModel>> {
       lastVideoCreatedAt: _list.last.createdAt,
     );
     _list = [..._list, ...nextVideos];
-    state = AsyncValue.data([..._list, ...nextVideos]);
+    state = AsyncValue.data([..._list]);
+  }
+
+  Future<void> refresh() async {
+    state = const AsyncValue.loading();
+    final videos = await _fetchVideos(lastVideoCreatedAt: null);
+    _list = videos;
+    state = AsyncValue.data(_list);
   }
 }
 
