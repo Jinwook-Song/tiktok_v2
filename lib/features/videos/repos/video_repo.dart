@@ -38,7 +38,7 @@ class VideoRepo {
     }
   }
 
-  Future<void> toggleLikeVideo({
+  Future<bool> toggleLikeVideo({
     required String videoId,
     required String uid,
     required String thumbnailUrl,
@@ -57,6 +57,7 @@ class VideoRepo {
           .collection('videos')
           .doc(videoId)
           .update({'likes': FieldValue.increment(-1)});
+      return false;
     } else {
       await query.set({'createdAt': DateTime.now().millisecondsSinceEpoch});
       await _firestore
@@ -72,7 +73,24 @@ class VideoRepo {
           .collection('videos')
           .doc(videoId)
           .update({'likes': FieldValue.increment(1)});
+      return true;
     }
+  }
+
+  Future<bool> isLiked({
+    required String videoId,
+    required String uid,
+  }) async {
+    final query = _firestore.collection('likes').doc('${uid}_$videoId');
+    final like = await query.get();
+    return like.exists;
+  }
+
+  Future<int> likeCount({
+    required String videoId,
+  }) async {
+    final video = await _firestore.collection('videos').doc(videoId).get();
+    return video.data()!['likes'];
   }
 }
 

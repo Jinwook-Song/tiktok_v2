@@ -5,11 +5,13 @@ import 'package:tiktok_v2/constants/sizes.dart';
 class VideoButton extends StatelessWidget {
   final IconData icon;
   final String text;
+  final Color? iconColor;
 
   const VideoButton({
     super.key,
     required this.icon,
     required this.text,
+    this.iconColor,
   });
 
   @override
@@ -18,15 +20,15 @@ class VideoButton extends StatelessWidget {
       children: [
         Icon(
           icon,
-          color: Colors.white,
+          color: iconColor ?? Colors.white,
           size: Sizes.size32,
         ),
         Gaps.v5,
         Text(
           text,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: Sizes.size10,
-            color: Colors.white,
+            color: iconColor ?? Colors.white,
             fontWeight: FontWeight.w600,
           ),
         ),
