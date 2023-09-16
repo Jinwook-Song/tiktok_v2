@@ -85,13 +85,6 @@ class VideoRepo {
     final like = await query.get();
     return like.exists;
   }
-
-  Future<int> likeCount({
-    required String videoId,
-  }) async {
-    final video = await _firestore.collection('videos').doc(videoId).get();
-    return video.data()!['likes'];
-  }
 }
 
 final videoProvider = Provider((ref) => VideoRepo());

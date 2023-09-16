@@ -21,9 +21,6 @@ class VideoPostViewModel extends FamilyAsyncNotifier<void, String> {
         uid: ref.read(authProvider).user!.uid,
       );
 
-  Future<int> get likeCount async =>
-      await _videoRepo.likeCount(videoId: _videoId);
-
   @override
   FutureOr<void> build(String arg) {
     _videoId = arg;
@@ -32,11 +29,13 @@ class VideoPostViewModel extends FamilyAsyncNotifier<void, String> {
 
   Future<bool> toggleLikeVideo() async {
     final uid = ref.read(authProvider).user!.uid;
-    return await _videoRepo.toggleLikeVideo(
+    final isLiked = await _videoRepo.toggleLikeVideo(
       videoId: _videoId,
       uid: uid,
       thumbnailUrl: _video.thumbnailUrl,
     );
+
+    return isLiked;
   }
 }
 

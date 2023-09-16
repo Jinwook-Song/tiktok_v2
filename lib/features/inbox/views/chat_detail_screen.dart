@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_v2/constants/gaps.dart';
 import 'package:tiktok_v2/constants/sizes.dart';
+import 'package:tiktok_v2/features/inbox/view_models/message_vm.dart';
 import 'package:tiktok_v2/utils.dart';
 
-class ChatDetailScreen extends StatefulWidget {
+class ChatDetailScreen extends ConsumerStatefulWidget {
   final String chatId;
   const ChatDetailScreen({
     super.key,
@@ -13,14 +15,28 @@ class ChatDetailScreen extends StatefulWidget {
   });
 
   @override
-  State<ChatDetailScreen> createState() => _ChatDetailScreenState();
+  ConsumerState<ChatDetailScreen> createState() => ChatDetailScreenState();
 }
 
-class _ChatDetailScreenState extends State<ChatDetailScreen> {
+class ChatDetailScreenState extends ConsumerState<ChatDetailScreen> {
+  final TextEditingController _textEditingController = TextEditingController();
+
+  void _onSendMessageTap() async {
+    final text = _textEditingController.text;
+    if (text == '') return;
+
+    await ref
+        .read(messageProvider('mrkAMzrDNEfsQG74MLZk').notifier)
+        .sendMessage(context: context, text: 'hello');
+    _textEditingController.text = '';
+  }
+
   @override
   Widget build(BuildContext context) {
-    print(widget.chatId);
+    final isLoading =
+        ref.watch(messageProvider('mrkAMzrDNEfsQG74MLZk')).isLoading;
     return Scaffold(
+      // resizeToAvoidBottomInset: true,
       appBar: AppBar(
         title: ListTile(
           contentPadding: EdgeInsets.zero,
@@ -89,7 +105,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
               left: Sizes.size14,
               right: Sizes.size14,
               top: Sizes.size20,
-              bottom: Sizes.size20 + Sizes.size80,
+              bottom: Sizes.size20 + 120,
             ),
             itemBuilder: (context, index) {
               final isMine = index % 2 == 0;
@@ -142,6 +158,7 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                     child: SizedBox(
                       height: Sizes.size44,
                       child: CupertinoTextField(
+                        controller: _textEditingController,
                         padding: const EdgeInsets.all(Sizes.size10),
                         placeholder: 'Send a message...',
                         style: TextStyle(
@@ -159,9 +176,15 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                       ),
                     ),
                   ),
-                  Gaps.h20,
-                  const SizedBox(
-                    child: FaIcon(FontAwesomeIcons.paperPlane),
+                  Container(
+                    alignment: Alignment.center,
+                    width: Sizes.size48,
+                    child: isLoading
+                        ? const CircularProgressIndicator.adaptive()
+                        : IconButton(
+                            onPressed: _onSendMessageTap,
+                            icon: const Icon(FontAwesomeIcons.paperPlane),
+                          ),
                   )
                 ],
               ),

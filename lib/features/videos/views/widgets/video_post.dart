@@ -87,11 +87,8 @@ class VideoPostState extends ConsumerState<VideoPost>
     final isLiked = await ref
         .watch(videoPostProvider(widget.videoData.id).notifier)
         .isLiked;
-    final likeCount = await ref
-        .watch(videoPostProvider(widget.videoData.id).notifier)
-        .likeCount;
+
     _isLiked = isLiked;
-    _likeCount = likeCount;
     setState(() {});
   }
 
@@ -158,11 +155,13 @@ class VideoPostState extends ConsumerState<VideoPost>
     final isLiked = await ref
         .read(videoPostProvider(widget.videoData.id).notifier)
         .toggleLikeVideo();
-    final likeCount = await ref
-        .read(videoPostProvider(widget.videoData.id).notifier)
-        .likeCount;
+
     _isLiked = isLiked;
-    _likeCount = likeCount;
+    if (isLiked) {
+      _likeCount++;
+    } else {
+      _likeCount--;
+    }
     setState(() {});
   }
 
