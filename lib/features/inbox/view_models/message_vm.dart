@@ -48,7 +48,8 @@ final messageProvider =
 );
 
 // must return a stream
-final chatProvider = StreamProvider.family<List<MessageModel>, String>(
+final chatProvider =
+    StreamProvider.autoDispose.family<List<MessageModel>, String>(
   (ref, arg) {
     final FirebaseFirestore firestore = FirebaseFirestore.instance;
     final chatRoomId = arg;
@@ -66,6 +67,8 @@ final chatProvider = StreamProvider.family<List<MessageModel>, String>(
                   doc.data(),
                 ),
               )
+              .toList()
+              .reversed
               .toList(),
         );
   },

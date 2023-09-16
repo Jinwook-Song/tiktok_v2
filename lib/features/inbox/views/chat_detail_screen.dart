@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_v2/constants/gaps.dart';
 import 'package:tiktok_v2/constants/sizes.dart';
+import 'package:tiktok_v2/features/authentication/repos/auth_repo.dart';
 import 'package:tiktok_v2/features/inbox/view_models/message_vm.dart';
 import 'package:tiktok_v2/utils.dart';
 
@@ -27,7 +28,7 @@ class ChatDetailScreenState extends ConsumerState<ChatDetailScreen> {
 
     await ref
         .read(messageProvider('mrkAMzrDNEfsQG74MLZk').notifier)
-        .sendMessage(context: context, text: 'hello');
+        .sendMessage(context: context, text: text);
     _textEditingController.text = '';
   }
 
@@ -36,7 +37,6 @@ class ChatDetailScreenState extends ConsumerState<ChatDetailScreen> {
     final isLoading =
         ref.watch(messageProvider('mrkAMzrDNEfsQG74MLZk')).isLoading;
     return Scaffold(
-      // resizeToAvoidBottomInset: true,
       appBar: AppBar(
         title: ListTile(
           contentPadding: EdgeInsets.zero,
@@ -100,54 +100,68 @@ class ChatDetailScreenState extends ConsumerState<ChatDetailScreen> {
       ),
       body: Stack(
         children: [
-          ListView.separated(
-            padding: const EdgeInsets.only(
-              left: Sizes.size14,
-              right: Sizes.size14,
-              top: Sizes.size20,
-              bottom: Sizes.size20 + 120,
-            ),
-            itemBuilder: (context, index) {
-              final isMine = index % 2 == 0;
-              return Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment:
-                    isMine ? MainAxisAlignment.end : MainAxisAlignment.start,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(Sizes.size14),
-                    decoration: BoxDecoration(
-                      color:
-                          isMine ? Colors.blue : Theme.of(context).primaryColor,
-                      borderRadius: BorderRadius.only(
-                        topLeft: const Radius.circular(
-                          Sizes.size20,
-                        ),
-                        topRight: const Radius.circular(
-                          Sizes.size20,
-                        ),
-                        bottomLeft: Radius.circular(
-                          isMine ? Sizes.size20 : Sizes.size5,
-                        ),
-                        bottomRight: Radius.circular(
-                          !isMine ? Sizes.size20 : Sizes.size5,
-                        ),
-                      ),
-                    ),
-                    child: const Text(
-                      "this is a message!",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: Sizes.size16,
-                      ),
-                    ),
+          ref.watch(chatProvider('mrkAMzrDNEfsQG74MLZk')).when(
+                data: (data) => ListView.separated(
+                  reverse: true,
+                  itemCount: data.length,
+                  separatorBuilder: (context, index) => Gaps.v10,
+                  padding: EdgeInsets.only(
+                    left: Sizes.size14,
+                    right: Sizes.size14,
+                    top: Sizes.size20,
+                    bottom:
+                        MediaQuery.of(context).padding.bottom + Sizes.size96,
                   ),
-                ],
-              );
-            },
-            separatorBuilder: (context, index) => Gaps.v10,
-            itemCount: 10,
-          ),
+                  itemBuilder: (context, index) {
+                    final message = data[index];
+                    final isMine =
+                        message.uid == ref.read(authProvider).user!.uid;
+                    return Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: isMine
+                          ? MainAxisAlignment.end
+                          : MainAxisAlignment.start,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(Sizes.size14),
+                          decoration: BoxDecoration(
+                            color: isMine
+                                ? Colors.blue
+                                : Theme.of(context).primaryColor,
+                            borderRadius: BorderRadius.only(
+                              topLeft: const Radius.circular(
+                                Sizes.size20,
+                              ),
+                              topRight: const Radius.circular(
+                                Sizes.size20,
+                              ),
+                              bottomLeft: Radius.circular(
+                                isMine ? Sizes.size20 : Sizes.size5,
+                              ),
+                              bottomRight: Radius.circular(
+                                !isMine ? Sizes.size20 : Sizes.size5,
+                              ),
+                            ),
+                          ),
+                          child: Text(
+                            message.text,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: Sizes.size16,
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                ),
+                error: (error, stackTrace) => Center(
+                  child: Text(error.toString()),
+                ),
+                loading: () => const Center(
+                  child: CircularProgressIndicator.adaptive(),
+                ),
+              ),
           Positioned(
             bottom: 0,
             width: MediaQuery.of(context).size.width,
